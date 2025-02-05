@@ -1,0 +1,175 @@
+{% import "components/head.html" as head with context %}
+{%
+  import
+  "components/basic.html" as basic with context
+%}
+
+<!doctype html>
+
+<html
+  {{ head.language_code_component() }}
+  data-content_root="{{ content_root }}"
+>
+  <head>
+    <title>{{ head.title_component() }}</title>
+    {{ head.meta_component() }} {{ head.styles_component() }}
+    {{ head.favicon_component() }}
+    {{ head.rellinks_component() }}
+  </head>
+
+  <body x-data="{ sidebar: false }">
+    <section
+      class="container mx-auto grid text-slate-700 lg:grid-cols-[1fr_3fr_1fr] lg:[grid-template-areas:'header_header_header''sidebar_main_aside']"
+    >
+      <header
+        class="flex h-16 items-center justify-between border-b border-slate-200 px-8 py-2 lg:px-0 lg:[grid-area:header]"
+      >
+        {% set button_classes %}
+          aspect-square h-4/5 rounded-lg border p-1 ring-0 ring-slate-200
+          hover:ring-slate-400 focus:outline-none focus:ring-4
+          focus:ring-slate-400 dark:border-blue-500 dark:hover:bg-blue-500
+          dark:focus:ring-blue-800"
+        {% endset %}
+
+        {# Sidebar open/close toggle #}
+        <div class="h-4/5 content-center lg:hidden">
+          <button class="{{ button_classes }}" @click="sidebar = !sidebar">
+            <span class="sr-only">Sidebar open/close button</span>
+            <img
+              :alt="sidebar ? 'Close sidebar' : 'Open sidebar'"
+              :src="sidebar ? '{{ pathto("_static/images/close-sidebar-icon.svg", 1) }}' : '{{ pathto("_static/images/open-sidebar-icon.svg", 1) }}'"
+            />
+          </button>
+        </div>
+
+        <h1 class="h-full">
+          <a href="{{ pathto(root_doc)|e }}">
+            <img
+              class="max-h-full"
+              src="{{ logo_url|e }}"
+              alt="{{ logo_alt|e }}"
+            />
+          </a>
+        </h1>
+
+        {# Styles for all <input>s #}
+        {% set input_classes %}
+          rounded border-transparent bg-slate-50 p-1 text-xs ring-1
+          ring-slate-200 transition duration-200 placeholder:text-xs
+          hover:ring-2 hover:ring-slate-400 focus:outline-none focus:ring-4
+          focus:ring-slate-400
+        {% endset %}
+
+        <search class="hidden lg:block">
+          {# As macro because will be used twice (in sidebar on mobile) #}
+          {% set searchbox %}
+            <form action="{{ pathto('search') }}" method="get">
+              <input
+                type="text"
+                name="q"
+                placeholder="{{ _('Hledat') }}"
+                aria-label="{{ _('Vyhledávání v dokumentaci') }}"
+                spellcheck="false"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                class="{{ input_classes }} h-4/5 w-60"
+              />
+            </form>
+          {% endset %}
+          {{ searchbox }}
+        </search>
+
+        {# Tlačítka vpravo nahoře #}
+        <ul class="flex h-4/5 gap-3">
+          {# Přepínač jazyků. {} is default value #}
+          {% if theme_language_switcher != {} %}
+            <li class="flex items-center justify-center">
+              <select
+                id="language-switcher"
+                class="{{ input_classes }} pr-8"
+                onchange="window.location.href = document.getElementById('language-switcher').value"
+              >
+                {# loop over dict #}
+                {% for code, label in theme_language_switcher.items() %}
+                  <option
+                    {# pathto() needs absolute path, but pagename returns string without "/" #}
+                    value="{{ base_path }}/{{ code }}{{ pathto('/' + pagename) }}"
+                    {% if code == language %}selected{% endif %}
+                  >
+                    {{ label }}
+                  </option>
+                {% endfor %}
+              </select>
+            </li>
+          {% endif %}
+
+          {# <li class="flex items-center justify-center">
+            <button class="{{ button_classes }}"">
+              <img
+                src="{{ pathto("_static/images/sun-icon.svg", 1) }}"
+                alt="Toggle dark/light mode"
+              />
+            </button>
+          </li> #}
+        </ul>
+      </header>
+
+      {# Mobile sidebar #}
+      <nav
+        class="mx-8 mt-6 text-xs lg:hidden"
+        x-cloak
+        x-show="sidebar"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 -translate-y-1/4"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-1/4"
+      >
+        <search class="mb-4 lg:hidden">{{ searchbox }}</search>
+
+        {{ basic.global_toc_component(titles_only=true) }}
+      </nav>
+
+      {# Desktop sidebar #}
+      <nav
+        class="mx-8 mt-6 hidden text-xs lg:mx-0 lg:block lg:border-r lg:border-slate-200 lg:[grid-area:sidebar]"
+      >
+        {{ basic.global_toc_component(titles_only=true) }}
+      </nav>
+
+      <main class="mx-8 pt-6 lg:[grid-area:main]">
+        <nav class="text-xs">
+          {{ basic.breadcrumb_component(root_label=project) }}
+        </nav>
+
+        {# role="main" required by built-in JavaScript search to show a page preview on the result page #}
+        <article role="main">{% block body %}{% endblock %}</article>
+
+        {{ basic.article_nav_component() }}
+      </main>
+
+      <aside class="mx-8 hidden pt-6 lg:mr-0 lg:block lg:[grid-area:aside]">
+        <div class="rounded-lg border border-slate-200 p-3 text-xs">
+          <p class="mb-4 font-semibold">Na této stránce</p>
+          {{ basic.local_toc_component() }}
+        </div>
+      </aside>
+    </section>
+
+    <footer class="flex h-40 flex-col justify-end">
+      <div class="container mx-auto mb-2 text-center text-xs">
+        {{ basic.copyright_component() }}
+      </div>
+    </footer>
+
+    {% block before_body %}
+      <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
+      ></script>
+      {{ head.scripts_component() }}
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,404 @@
+/* ======================================================================== */
+/* Imports  */
+/* ======================================================================== */
+/* @import rules must appear at the very beginning */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* ======================================================================== */
+/* Tailwind  */
+/* ======================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-optical-sizing: auto;
+  }
+
+  /* Search */
+  search input {
+    background-image: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%2020%2020%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M8.33366%203.33329C5.57224%203.33329%203.33366%205.57187%203.33366%208.33329C3.33366%2011.0947%205.57224%2013.3333%208.33366%2013.3333C11.0951%2013.3333%2013.3337%2011.0947%2013.3337%208.33329C13.3337%205.57187%2011.0951%203.33329%208.33366%203.33329ZM1.66699%208.33329C1.66699%204.65139%204.65176%201.66663%208.33366%201.66663C12.0156%201.66663%2015.0003%204.65139%2015.0003%208.33329C15.0003%209.87387%2014.4778%2011.2924%2013.6002%2012.4213L18.0896%2016.9107C18.415%2017.2361%2018.415%2017.7638%2018.0896%2018.0892C17.7641%2018.4147%2017.2365%2018.4146%2016.9111%2018.0892L12.4217%2013.5998C11.2928%2014.4774%209.87427%2015%208.33366%2015C4.65176%2015%201.66699%2012.0152%201.66699%208.33329Z%22%20fill=%22%235D6B7B%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1rem;
+    /* Prevent entered text to reach icon on the right */
+    padding-right: 2rem;
+  }
+
+  footer {
+    --bg-img: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%201060%20281%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cg%20opacity=%220.08%22%3E%0A%3Cmask%20id=%22mask0_170_859%22%20style=%22mask-type%3Aalpha%22%20maskUnits=%22userSpaceOnUse%22%20x=%22-402%22%20y=%22100%22%20width=%221418%22%20height=%221435%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M1010.99%20508.328L849.374%201331.91L849.373%201331.92C836.512%201397.46%20797.971%201455.15%20742.206%201492.32C686.45%201529.51%20618.065%201543.12%20552.068%201530.17L6.32915%201423.08C-83.8415%201405.4%20-159.254%201344.14%20-194.639%201259.84L-194.636%201259.83L-380.586%20817.072C-401.466%20767.32%20-407.082%20712.582%20-396.714%20659.744C-386.345%20606.906%20-360.458%20558.35%20-322.325%20520.177L-322.323%20520.163L17.1609%20180.513C81.778%20115.842%20174.749%2087.6255%20264.914%20105.334L810.652%20212.426C876.653%20225.377%20934.82%20263.821%20972.387%20319.323C1009.97%20374.816%201023.85%20442.794%201010.99%20508.328Z%22%20fill=%22black%22%2F%3E%0A%3C%2Fmask%3E%0A%3Cg%20mask=%22url(%23mask0_170_859)%22%3E%0A%3Cellipse%20cx=%22398.197%22%20cy=%22705.182%22%20rx=%221019.89%22%20ry=%22957.809%22%20transform=%22rotate(-78.8978%20398.197%20705.182)%22%20fill=%22url(%23paint0_linear_170_859)%22%2F%3E%0A%3Cellipse%20cx=%22798.377%22%20cy=%221404.52%22%20rx=%221209.47%22%20ry=%221135.85%22%20transform=%22rotate(-78.8978%20798.377%201404.52)%22%20fill=%22url(%23paint1_linear_170_859)%22%20fill-opacity=%220.3%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id=%22paint0_linear_170_859%22%20x1=%22-322.379%22%20y1=%221662.99%22%20x2=%222042.1%22%20y2=%22-1442.49%22%20gradientUnits=%22userSpaceOnUse%22%3E%0A%3Cstop%20stop-color=%22%2336B4A3%22%2F%3E%0A%3Cstop%20offset=%221%22%20stop-color=%22%2336B4A3%22%2F%3E%0A%3C%2FlinearGradient%3E%0A%3ClinearGradient%20id=%22paint1_linear_170_859%22%20x1=%221412.71%22%20y1=%22530.098%22%20x2=%221079.96%22%20y2=%221865.62%22%20gradientUnits=%22userSpaceOnUse%22%3E%0A%3Cstop%20stop-color=%22white%22%2F%3E%0A%3Cstop%20offset=%220.683939%22%20stop-color=%22white%22%20stop-opacity=%220%22%2F%3E%0A%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%0A%3C%2Fsvg%3E%0A");
+    background:
+      var(--bg-img) no-repeat,
+      var(--bg-img) no-repeat 65%;
+  }
+}
+
+@layer components {
+  /* === Global ToC ======================================================== */
+  .global-toc {
+    li.toctree-l1:first-child {
+      @apply mt-0;
+    }
+    /* L1 */
+    li.toctree-l1 {
+      @apply my-2 font-bold;
+      li {
+        @apply mt-2;
+      }
+    }
+    /* Active page childs */
+    li.toctree-l1.current {
+      > a {
+        @apply text-accent;
+      }
+      > ul {
+        @apply border-l-accent my-4 border-l-2 pl-4 font-normal;
+      }
+    }
+    /* Active page */
+    li.toctree-l1 a.current {
+      @apply text-accent font-semibold;
+    }
+    /* L3 */
+    .toctree-l2.current > ul {
+      @apply my-4 ml-2 text-sm;
+    }
+  }
+
+  /* === Local ToC ========================================================= */
+  .local-toc {
+    @apply text-gray-700;
+
+    /* Hide very first li because it's page title */
+    & > ul > li > a {
+      @apply hidden;
+    }
+    li:not(:last-child) {
+      @apply mb-2;
+    }
+    /* L2 and more */
+    & > ul > li > ul ul {
+      @apply ml-4 mt-2;
+    }
+    a {
+      @apply transition-all duration-200;
+      &:hover {
+        @apply border-b border-black;
+      }
+    }
+  }
+
+  /* === Breadcrumb ======================================================== */
+  .breadcrumb {
+    @apply flex flex-wrap font-semibold;
+
+    li {
+      @apply my-1;
+    }
+    /* delimiter */
+    li:not(:last-child)::after {
+      content: "/";
+      @apply mx-1 text-slate-300;
+    }
+    .breadcrumb__item--active {
+      @apply text-accent;
+    }
+  }
+}
+
+@layer utilities {
+}
+
+/* ======================================================================== */
+/* Always include */
+/* ======================================================================== */
+/* When used without @layer, styles are always included even if not used (no three-shaking applied) */
+
+/* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
+[x-cloak=""] {
+  display: none;
+}
+
+/* ======================================================================== */
+/* Sphinx generated content */
+/* ======================================================================== */
+main article {
+  /* === Basic ============================================================= */
+
+  /* === Settings === */
+  --text-color: theme("colors.text");
+  --primary-color: theme("colors.primary");
+  --secondary-color: theme("colors.secondary");
+  --accent-color: theme("colors.accent");
+
+  --text-font: theme("fontFamily.text");
+  --text-size: 1rem;
+
+  --heading-font: theme("fontFamily.heading");
+  --heading-color: var(--text-color);
+  --heading-scale: 1.2;
+
+  /* === Etc === */
+  font-variant-numeric: oldstyle-nums;
+  font-size: var(--text-size);
+  color: var(--text-color);
+
+  /* === Headings ========================================================== */
+  /* And rubric */
+
+  /* === All headings === */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .rubric {
+    line-height: 1;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading-color);
+    transition: color 0.5s ease;
+    font-weight: 600;
+  }
+
+  /* === Heading scale === */
+  h1 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+    margin-top: 2rem;
+  }
+
+  h2 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h3 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h4 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h5 {
+    font-size: calc(var(--text-size) * var(--heading-scale));
+  }
+
+  h6,
+  .rubric {
+    font-size: var(--text-size);
+  }
+
+  /* === Paragraphs ======================================================== */
+  --para-margin-bottom: 1rem;
+
+  p {
+    margin-bottom: var(--para-margin-bottom);
+    line-height: 1.65;
+  }
+
+  /* === Excerpt =========================================================== */
+
+  /* every h1 */
+  h1 {
+    @apply bg-secondary border-secondary mt-8 px-6 pt-6 text-neutral-50;
+  }
+
+  /* h1 followed by p */
+  h1:has(+ p) {
+    @apply mb-0 rounded-t-lg pb-6;
+  }
+
+  /* h1 not followed by p */
+  h1:not(:has(+ p)) {
+    @apply rounded-lg border-2 pb-6;
+    margin-bottom: var(--para-margin-bottom);
+  }
+
+  /* p preceded by h1 */
+  h1 + p {
+    @apply bg-secondary border-secondary mt-0 rounded-b-lg px-6 pb-6 pt-0 text-neutral-50;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.5;
+
+    a {
+      @apply !text-inherit;
+      &:hover {
+        @apply !border-b-2 !border-neutral-50 !filter-none;
+      }
+    }
+  }
+
+  /* === Links ============================================================= */
+
+  /* Just links. No permalinks and image links */
+  /* <a> tags not followed by <img> and not inside <h1>-<h6> */
+  a:not(:has(> img)):not(h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a) {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid var(--primary-color);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(0.8); /* Darken the color by 20% */
+      border-bottom-color: var(--accent-color);
+      border-bottom-width: 2px;
+    }
+  }
+
+  /* === External links === */
+  a.external::after {
+    display: inline-block;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='%237dcabf'%3E%3Cline x1='4' y1='16' x2='16' y2='4' fill='none' stroke='%237dcabf' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3C/line%3E%3Cpolyline points='16 11 16 4 9 4' fill='none' stroke='%237dcabf' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
+    width: 1cap;
+    height: 1cap;
+  }
+
+  /* === Permalinks === */
+  /* Hide all permalinks */
+  a.headerlink {
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Until heading hovered */
+  h2:hover,
+  h3:hover,
+  h4:hover,
+  h5:hover,
+  h6:hover {
+    a.headerlink {
+      visibility: visible;
+      color: var(--accent-color);
+      padding-left: 0.15em;
+    }
+  }
+
+  /* === Tables ============================================================ */
+  --table-radius: 0.5rem;
+
+  table {
+    /* Table needs to be have "separate" borders" to draw rounded border. */
+    border-collapse: separate;
+
+    border-radius: var(--table-radius);
+    border: 1px solid theme(colors.slate.200);
+    /* Reduce gap among cells */
+    border-spacing: 0;
+    margin: var(--para-margin-bottom) 0;
+  }
+
+  /* Heading */
+  thead th {
+    background: theme(colors.gray.100);
+    border-bottom: 1px solid theme(colors.slate.200);
+    text-align: left;
+  }
+
+  /* Heading first and last cell needs to be custom shaped borders */
+  thead th:first-child {
+    border-radius: var(--table-radius) 0 0 0;
+  }
+  thead th:last-child {
+    border-radius: 0 var(--table-radius) 0 0;
+  }
+
+  th,
+  td {
+    padding: 1rem 1rem 0;
+  }
+
+  /* Horizontal border except for the last row */
+  tbody :not(tr:last-child) td {
+    border-bottom: 1px solid theme(colors.slate.200);
+  }
+
+  /* === Lists ============================================================= */
+  ul,
+  ol {
+    padding: 0 0 0 2rem;
+  }
+  ol {
+    list-style: decimal outside;
+  }
+  ul {
+    list-style: disc outside;
+  }
+  /* Remove extra margin of <p> inside <li>s */
+  li p {
+    margin-bottom: 0.5rem;
+  }
+
+  /* === Images ============================================================ */
+  img {
+    margin: var(--para-margin-bottom) 0;
+  }
+
+  /* === Admonition ======================================================== */
+  --see-also-icon: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M12%201C12.5523%201%2013%201.44772%2013%202V3C13%203.55228%2012.5523%204%2012%204C11.4477%204%2011%203.55228%2011%203V2C11%201.44772%2011.4477%201%2012%201ZM4.1928%204.1928C4.58332%203.80227%205.21648%203.80227%205.60701%204.1928L6.20711%204.79289C6.59763%205.18342%206.59763%205.81658%206.20711%206.20711C5.81658%206.59763%205.18342%206.59763%204.79289%206.20711L4.1928%205.60701C3.80227%205.21648%203.80227%204.58332%204.1928%204.1928ZM19.8074%204.19288C20.1979%204.58346%2020.1978%205.21662%2019.8073%205.6071L19.207%206.2072C18.8164%206.59767%2018.1833%206.59759%2017.7928%206.20702C17.4023%205.81644%2017.4024%205.18328%2017.793%204.7928L18.3932%204.19271C18.7838%203.80223%2019.417%203.80231%2019.8074%204.19288ZM12%207C9.23858%207%207%209.23858%207%2012C7%2014.7614%209.23858%2017%2012%2017C14.7614%2017%2017%2014.7614%2017%2012C17%209.23858%2014.7614%207%2012%207ZM5%2012C5%208.13401%208.13401%205%2012%205C15.866%205%2019%208.13401%2019%2012C19%2014.7924%2017.3649%2017.2029%2015%2018.3264V20C15%2021.6569%2013.6569%2023%2012%2023C10.3431%2023%209%2021.6569%209%2020V18.3264C6.63505%2017.2029%205%2014.7924%205%2012ZM11%2018.9291V20C11%2020.5523%2011.4477%2021%2012%2021C12.5523%2021%2013%2020.5523%2013%2020V18.9291C12.6734%2018.9758%2012.3395%2019%2012%2019C11.6605%2019%2011.3266%2018.9758%2011%2018.9291ZM1%2012C1%2011.4477%201.44772%2011%202%2011H3C3.55228%2011%204%2011.4477%204%2012C4%2012.5523%203.55228%2013%203%2013H2C1.44772%2013%201%2012.5523%201%2012ZM20%2012C20%2011.4477%2020.4477%2011%2021%2011H22C22.5523%2011%2023%2011.4477%2023%2012C23%2012.5523%2022.5523%2013%2022%2013H21C20.4477%2013%2020%2012.5523%2020%2012Z%22%20fill=%22%232EAB9A%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+
+  .admonition {
+    /* overflow-hidden is crutial to do not overflow title's background */
+    /* after adds clear utility */
+    @apply my-6 overflow-hidden rounded-lg border border-[#d5eeea] after:clear-both after:block after:content-[""];
+  }
+  /* Set left and right margin to every direct child except the title */
+  .admonition > *:not(.admonition-title) {
+    @apply mx-6;
+  }
+
+  .admonition-title {
+    @apply flex bg-[#d5eeea] p-2 font-bold text-[#2EAB9A];
+    &::before {
+      content: "";
+      height: 1lh;
+      aspect-ratio: 1/1;
+      margin-left: 0.5rem;
+      margin-right: 0.5em;
+      background-image: var(--see-also-icon);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  /* === Glossary ========================================================== */
+  dl.glossary {
+    dt {
+      @apply font-bold;
+    }
+    dd {
+      @apply ml-4;
+    }
+  }
+}
+
+/* ==== Code examples ====================================================== */
+code {
+  @apply rounded border border-dotted border-gray-300 bg-gray-100 p-[0.15em] text-sm text-rose-600;
+}
+
+/* ======================================================================== */
+/* Sphinx search */
+/* ======================================================================== */
+
+.highlighted {
+  @apply rounded border border-dotted border-gray-300 bg-yellow-200;
+}
+
+/* Search page results */
+#search-results ul {
+  /* Display as vertical grid */
+  @apply grid list-none grid-cols-1 gap-4 p-0;
+
+  li a {
+    @apply text-xl;
+  }
+}

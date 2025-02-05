@@ -1,0 +1,16 @@
+[theme]
+inherit = "none"
+# relative to static/
+stylesheets = [
+    "styles/output.css",     # build by Tailwind CSS
+]
+# No sidebars
+sidebars = []
+# Code highlithing styles for light (default) and dark variant
+# Style names from https://pygments.org/styles/
+pygments_style = { "default" = "default" }
+
+# Options configurable via html_theme_options in conf.py.
+# Delete/replace as required
+[options]
+language_switcher = {}

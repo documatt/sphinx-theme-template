@@ -1,0 +1,14 @@
+from pathlib import Path
+
+from sphinx.application import Sphinx
+
+THEME_NAME = "project_slug"
+
+
+def setup(app: Sphinx) -> dict[str, bool]:
+    """Setup the Sphinx application."""
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    theme_path = str(Path(__file__).parent.resolve())
+    app.add_html_theme(THEME_NAME, theme_path)
+
+    return {"parallel_read_safe": True, "parallel_write_safe": True}

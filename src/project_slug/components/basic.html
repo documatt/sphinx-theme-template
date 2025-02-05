@@ -1,0 +1,178 @@
+{#
+Title suitable for HTML <title> tag.
+
+Add and style delimiter with CSS.
+#}
+{% macro breadcrumb_component(root_label=shorttitle) %}
+  <!-- breadcrumb_component -->
+  <ol class="breadcrumb">
+    <li class="breadcrumb__item breadcrumb__item--root">
+      <a href="{{ pathto(root_doc)|e }}"> {{ root_label|e }} </a>
+    </li>
+
+    {%- for parent in parents %}
+      <li class="breadcrumb__item breadcrumb__item--{{ loop.index }}">
+        <a href="{{ parent.link|e }}"> {{ parent.title }} </a>
+      </li>
+    {%- endfor %}
+
+    <li class="breadcrumb__item breadcrumb__item--active">
+      <a href="{{ link|e }}"> {{ title }} </a>
+    </li>
+  </ol>
+  <!-- .breadcrumb_component -->
+{% endmacro %}
+
+{% macro article_nav_component() %}
+  <!-- article_nav_component -->
+  <nav class="mt-8">
+    <ul class="flex flex-wrap justify-between gap-2">
+      <li class="flex flex-col gap-1">
+        {% if prev %}
+          <span class="text-xs font-semibold text-[#5D6B7B]">
+            <svg
+              class="inline"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14 7.99992C14 8.51539 13.5758 8.93325 13.0526 8.93325L5.23452 8.93325L7.40673 11.0733C7.7767 11.4378 7.7767 12.0287 7.40673 12.3932C7.03676 12.7577 6.43692 12.7577 6.06695 12.3932L2.27748 8.65988C1.90751 8.2954 1.90751 7.70444 2.27748 7.33995L6.06695 3.60662C6.43692 3.24213 7.03676 3.24213 7.40673 3.60662C7.7767 3.97111 7.7767 4.56206 7.40673 4.92655L5.23452 7.06659L13.0526 7.06659C13.5758 7.06659 14 7.48445 14 7.99992Z"
+                fill="#5D6B7B"
+              />
+            </svg>
+            {{ _('Předchozí') }}
+          </span>
+          <a
+            class="text-accent border-primary border-b-1 hover:border-accent transition-all duration-200 hover:border-b-2 hover:brightness-75"
+            href="{{ prev.link|e }}"
+            title="{{ _('Předchozí článek') }}"
+          >
+            {{ prev.title }}
+          </a>
+        {% endif %}
+      </li>
+      <li class="flex flex-col gap-1 lg:text-right">
+        {% if next %}
+          <span class="text-xs font-semibold text-[#5D6B7B]">
+            <svg
+              class="inline rotate-180"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14 7.99992C14 8.51539 13.5758 8.93325 13.0526 8.93325L5.23452 8.93325L7.40673 11.0733C7.7767 11.4378 7.7767 12.0287 7.40673 12.3932C7.03676 12.7577 6.43692 12.7577 6.06695 12.3932L2.27748 8.65988C1.90751 8.2954 1.90751 7.70444 2.27748 7.33995L6.06695 3.60662C6.43692 3.24213 7.03676 3.24213 7.40673 3.60662C7.7767 3.97111 7.7767 4.56206 7.40673 4.92655L5.23452 7.06659L13.0526 7.06659C13.5758 7.06659 14 7.48445 14 7.99992Z"
+                fill="#5D6B7B"
+              />
+            </svg>
+            {{ _('Následující') }}
+          </span>
+          <a
+            class="text-accent border-primary border-b-1 hover:border-accent transition-all duration-200 hover:border-b-2 hover:brightness-75"
+            href="{{ next.link|e }}"
+            title="{{ _('Následující článek') }}"
+          >
+            {{ next.title }}
+          </a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+  <!-- .article_nav_component -->
+{% endmacro %}
+
+{%- macro copyright_component() %}
+  <!-- copyright_component -->
+  {%- if show_copyright %}
+    {%- if hasdoc('copyright') %}
+      {%- set copyright_prefix = '<a href="' + pathto('copyright') + '">' + _('Copyright') + '</a>' -%}
+    {%- else %}
+      {%- set copyright_prefix = _('Copyright') %}
+    {%- endif %}
+    {%- if copyright is iterable and copyright is not string %}
+      {% for copyright_line in copyright %}
+        {% trans trimmed copyright_prefix=copyright_prefix, copyright=copyright_line|e %}
+          &copy; {{ copyright_prefix }} {{ copyright }}.
+        {% endtrans %}
+        {%- if not loop.last %}<br />{%- endif %}
+      {% endfor %}
+    {%- else %}
+      {% trans trimmed copyright_prefix=copyright_prefix, copyright=copyright|e %}
+        &copy; {{ copyright_prefix }} {{ copyright }}
+      {% endtrans %}
+    {%- endif %}
+  {%- endif %}
+  <!-- .copyright_component -->
+{%- endmacro %}
+
+{% macro last_updated_component() %}
+  <!-- last_updated_component -->
+  {%- if last_updated %}
+    {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+  {%- endif %}
+  <!-- .last_updated_component -->
+{% endmacro %}
+
+{% macro created_using_component() %}
+  <!-- created_using_component -->
+  {%- if show_sphinx %}
+    {% trans sphinx_version=sphinx_version|e %}
+      Created using
+      <a href="https://www.sphinx-doc.org/">Sphinx</a>
+      {{ sphinx_version }}.
+    {% endtrans %}
+  {%- endif %}
+  <!-- .created_using_component -->
+{% endmacro %}
+
+{% macro logo_component() %}
+  <!-- logo_component -->
+  {% if logo_url %}
+    <img class="logo" src="{{ logo_url|e }}" alt="{{ logo_alt|e }}" />
+  {% endif %}
+  <!-- .logo_component -->
+{% endmacro %}
+
+{% macro global_toc_component(collapse=true, maxdepth="", titles_only=true, include_hidden=false) %}
+  <!-- global_toc_component -->
+  <div class="global-toc">
+    {{ toctree(collapse=collapse, maxdepth=maxdepth, titles_only=titles_only, includehidden=include_hidden) }}
+  </div>
+  <!-- .global_toc_component -->
+{% endmacro %}
+
+{% macro local_toc_component() %}
+  <!-- local_toc_component -->
+  <div class="local-toc">{{ toc }}</div>
+  <!-- .local_toc_component -->
+{% endmacro %}
+
+{# &raquo; is » #}
+{% macro rellinks_component(delim="&raquo;") %}
+  <!-- rellinks_component -->
+  <ul class="rellinks">
+    {% for rellink in rellinks %}
+      <li class="rellinks__item">
+        <a
+          href="{{ pathto(rellink[0])|e }}"
+          title="{{ rellink[1]|striptags|e }}"
+        >
+          {{ rellink[3] }}
+        </a>
+        {%- if not loop.first %}
+          {{ delim }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <!-- .rellinks_component -->
+{% endmacro %}
