@@ -11,7 +11,6 @@ THEME_NAME = "project_slug"
 
 def setup(app: Sphinx) -> dict[str, bool]:
     """Setup the Sphinx application."""
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     theme_path = str(Path(__file__).parent.resolve())
     app.add_html_theme(THEME_NAME, theme_path)
 

@@ -23,7 +23,10 @@ DEFAULT_SPHINX_OPTS = [
     # Be quiet
     "-q",
 ]
-SPHINX_AUTOBUILD_OPTS = []
+SPHINX_AUTOBUILD_OPTS = [
+    #  When developing themes, it is recommended to disable Sphinx's incremental build
+    "-a"
+]
 
 DEFAULT_BUILDER = "html"
 BUILDERS = [DEFAULT_BUILDER] + []
@@ -177,11 +180,14 @@ def preview(session):
         "sphinx-autobuild",
         "-b",
         builder,
+        # Sample docs are watched by default
         DOCS_INDIR,
-        # watch for changes in the theme sources
+        # But watch also for changes in theme
         "--watch",
         os.path.join("src", THEME_NAME),
+        # Output dir as usual
         get_outdir_path(builder, language),
+        # Standard Sphinx options
         *get_sphinx_opts(language),
         *SPHINX_AUTOBUILD_OPTS,
     )

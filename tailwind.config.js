@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // Paths are relative to project root, not tailwind.config.js file
   content: [
-    "./static/styles/**/*.css",
-    "./static/scripts/**/*.js",
+    "./src/project_slug/static/styles/**/*.css",
+    "./src/project_slug/static/scripts/**/*.js",
     // Jinja templates
-    "./**/*.html",
+    "./src/project_slug/**/*.html",
     // exclude node_modules/
     "!./node_modules/**",
   ],
