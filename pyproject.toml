@@ -2,6 +2,7 @@
 name = "project_slug"
 version = "0.1.0"
 readme = "README.md"
+description = "Your new cool Sphinx theme"
 dependencies = [
     "sphinx>=8.0",
 ]
@@ -21,8 +22,18 @@ classifiers = [
 [project.entry-points."sphinx.html_themes"]
 project_slug = "project_slug"
 
+# Dev dependencies
 [dependency-groups]
 dev = [
     "pytest>=8.3.4",
     "nox>=2024.10.9",
+    "sample-docs",
 ]
+
+[tool.uv.sources]
+# sample-docs is dev dependency from sample_docs/ directory
+sample-docs = { path = "sample_docs", editable = true }
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"

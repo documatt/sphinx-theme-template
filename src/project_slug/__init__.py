@@ -1,3 +1,7 @@
+"""
+Register theme with Sphinx.
+"""
+
 from pathlib import Path
 
 from sphinx.application import Sphinx

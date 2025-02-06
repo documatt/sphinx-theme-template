@@ -1,6 +1,7 @@
 [project]
 name = "sample_docs"
 version = "0.1.0"
+# Do NOT list Sphinx itself but Sphinx extensions or other dependencies only.
 dependencies = [
     "myst-parser==4.0.0",
     "linkify-it-py==2.0.3",
