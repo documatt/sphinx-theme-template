@@ -12,18 +12,18 @@ Images
 
 An image:
 
-.. image:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. image:: img/flouffy-VBkIK3qj3QE-unsplash.jpg
    :height: 200
    :width: 200
 
 A clickable image:
 
-.. image:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. image:: img/roberto-nickson-9sAZFxLGSbE-unsplash.jpg
    :target: https://unsplash.com/
    :height: 200
    :width: 200
 
-.. image:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. image:: img/flouffy-VBkIK3qj3QE-unsplash.jpg
    :align: right
    :height: 200
    :width: 200
@@ -43,7 +43,7 @@ sapiente veritatis doloribus accusantium molestiae modi recusandae
 excepturi facere, corrupti expedita sit nihil temporibus eius sequi
 animi, illo libero labore fuga.
 
-.. image:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. image:: img/roberto-nickson-9sAZFxLGSbE-unsplash.jpg
    :align: left
    :height: 200
    :width: 200
@@ -66,7 +66,7 @@ animi, illo libero labore fuga.
 Figures
 -------
 
-.. figure:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. figure:: img/flouffy-VBkIK3qj3QE-unsplash.jpg
    :alt: reStructuredText, the markup syntax
 
    A figure is an image with a caption and/or a legend:
@@ -83,7 +83,21 @@ Figures
 
 A figure directive with center alignment
 
-.. figure:: https://source.unsplash.com/200x200/daily?cute+puppy
+.. figure:: img/roberto-nickson-9sAZFxLGSbE-unsplash.jpg
    :align: center
 
    This caption should be centered.
+
+Inline images
+-------------
+
+.. |EXAMPLE| image:: /_static/favicon.svg
+    :width: 1em
+
+Inline image is a small image. Another example of using an inline
+image in a sentence. This is an example of an inline image: |EXAMPLE|. 
+Inline images can be very useful for adding small icons or symbols.
+They help to visually break up text |EXAMPLE| and make it more engaging.
+You can use them to represent different concepts or actions.
+Inline images should be used |EXAMPLE| sparingly to avoid cluttering the text.
+Make sure the images are relevant and add value to the content.

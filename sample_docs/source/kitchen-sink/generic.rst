@@ -3,7 +3,7 @@
    Licensed under Creative Commons Attribution-ShareAlike 4.0 International License
    SPDX-License-Identifier: CC-BY-SA-4.0
 
-.. |EXAMPLE| image:: https://source.unsplash.com/32x32/daily?icon
+.. |EXAMPLE| image:: /_static/favicon.svg
     :width: 1em
 
 =============
@@ -110,7 +110,7 @@ Sidebar
 
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-    .. image:: https://source.unsplash.com/200x200/daily?cute+puppy
+    .. image:: img/flouffy-VBkIK3qj3QE-unsplash.jpg
 
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
 

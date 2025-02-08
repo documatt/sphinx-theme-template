@@ -137,11 +137,13 @@ List Tables
 
 .. list-table:: This is a list table with images in it.
 
-    * - .. figure:: https://source.unsplash.com/200x200/daily?cute+puppy
+    * - .. figure:: img/flouffy-VBkIK3qj3QE-unsplash.jpg
+           :width: 200px
 
            This is a short caption for a figure.
 
-      - .. figure:: https://source.unsplash.com/200x200/daily?cute+puppy
+      - .. figure:: img/roberto-nickson-9sAZFxLGSbE-unsplash.jpg
+           :width: 200px
 
            This is a long caption for a figure. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
            Donec porttitor dolor in odio posuere, vitae ornare libero mattis. In lobortis justo vestibulum nibh aliquet, non.

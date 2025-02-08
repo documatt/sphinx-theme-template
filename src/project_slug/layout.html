@@ -16,6 +16,7 @@
 <html
   {% if language is not none %}lang="{{ language }}"{% endif %}
   data-content_root="{{ content_root }}"
+  {%- block html_attrs %}{% endblock %}
 >
   <head>
     <title>{{ title|striptags|e }} &mdash; {{ docstitle|e }}</title>
@@ -45,12 +46,12 @@
   </head>
 
   <body
-    class="container mx-auto grid gap-4 px-4 py-8 text-slate-700 lg:grid-cols-[1fr_3fr_1fr] lg:gap-8 lg:[grid-template-areas:'header_header_header''sidebar_main_aside''footer_footer_footer']"
+    class="container mx-auto grid gap-4 px-4 text-slate-700 lg:grid-cols-[1fr_3fr_1fr] lg:gap-8 lg:[grid-template-areas:'header_header_header''sidebar_main_aside''footer_footer_footer']"
     x-data="{ sidebar: false }"
     {%- block body_attrs %}{% endblock %}
   >
     <header
-      class="grid grid-cols-3 gap-4 rounded-lg border-2 border-slate-200 px-4 py-8 lg:[grid-area:header]"
+      class="grid grid-cols-3 gap-4 border-b-2 border-slate-200 px-4 py-8 lg:[grid-area:header]"
     >
       {# Left 1/3 #}
       <div>
@@ -171,7 +172,7 @@
 
     {# Global ToC - mobile #}
     <nav
-      class="mt-6 rounded-lg border border-slate-200 p-3 text-xs text-gray-700 lg:[grid-area:sidebar]"
+      class="mt-6 p-3 text-xs text-gray-700 lg:[grid-area:sidebar]"
       x-cloak
       x-show="sidebar"
       x-transition:enter="transition ease-out duration-300"
@@ -191,7 +192,7 @@
 
     {# Global ToC - desktop #}
     <nav class="hidden lg:block lg:[grid-area:sidebar]">
-      <div class="rounded-lg border border-slate-200 p-3 text-xs text-gray-700">
+      <div class="p-3 text-xs text-gray-700">
         <div class="global-toc">
           {{ toctree(collapse=true, maxdepth="", titles_only=true, includehidden=false) }}
         </div>
@@ -278,7 +279,7 @@
 
     {# Local ToC #}
     <aside class="hidden lg:block lg:[grid-area:aside]">
-      <div class="rounded-lg border border-slate-200 p-3 text-xs text-gray-700">
+      <div class="p-3 text-xs text-gray-700">
         <p class="mb-4 font-semibold">On this page</p>
         <div class="local-toc">{{ toc }}</div>
       </div>
@@ -287,7 +288,7 @@
     {# Copyright #}
     {# rounded-tl-lg rounded-tr-lg border-t-2 border-l-2 border-r-2 border-slate-200 px-4 py-8 #}
     <footer
-      class="mt-8 content-center rounded-lg border-2 border-slate-200 px-4 py-8 text-center text-xs lg:[grid-area:footer]"
+      class="mt-8 content-center border-t-2 border-slate-200 px-4 py-8 text-center text-xs lg:[grid-area:footer]"
     >
       {%- if show_copyright %}
         &copy; {{ copyright }}

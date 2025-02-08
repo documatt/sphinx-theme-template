@@ -20,7 +20,7 @@ module.exports = {
       },
       fontFamily: {
         text: ["Inter", "sans-serif"],
-        heading: ["Inter", "sans-serif"],
+        heading: ["Work Sans", "sans-serif"],
       },
     },
   },
