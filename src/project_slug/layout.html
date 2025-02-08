@@ -1,96 +1,112 @@
-{% import "components/head.html" as head with context %}
-{%
-  import
-  "components/basic.html" as basic with context
-%}
+{# Styles for all buttons #}
+{% set button_classes %}
+  aspect-square rounded-lg border p-1 ring-0 ring-slate-200 hover:ring-slate-400
+  focus:outline-none focus:ring-4 focus:ring-slate-400 dark:border-blue-500
+  dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+{% endset %}
+
+{# Styles for all <input>s #}
+{% set input_classes %}
+  rounded border-transparent bg-slate-50 p-1 text-xs ring-1 ring-slate-200
+  transition duration-200 placeholder:text-xs hover:ring-2 hover:ring-slate-400
+  focus:outline-none focus:ring-4 focus:ring-slate-400
+{% endset %}
 
 <!doctype html>
 
 <html
-  {{ head.language_code_component() }}
+  {% if language is not none %}lang="{{ language }}"{% endif %}
   data-content_root="{{ content_root }}"
 >
   <head>
-    <title>{{ head.title_component() }}</title>
-    {{ head.meta_component() }} {{ head.styles_component() }}
-    {{ head.favicon_component() }}
-    {{ head.rellinks_component() }}
+    <title>{{ title|striptags|e }} &mdash; {{ docstitle|e }}</title>
+
+    <meta charset="{{ encoding }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Sphinx {{ sphinx_version }}" />
+
+    {# <meta>s created with [`meta` directive](https://docutils.sourceforge.io/docs/ref/rst/directives.html#meta) #}
+    {{ metatags }}
+
+    {%- for css in css_files %}
+      {%- if css|attr("filename") %}
+        {{ css_tag(css) }}
+      {%- else %}
+        <link rel="stylesheet" href="{{ pathto(css, 1)|e }}" type="text/css" />
+      {%- endif %}
+    {%- endfor %}
+
+    {# If html_favicon in conf.py is set #}
+    {%- if favicon_url %}
+      <link rel="icon" href="{{ favicon_url|e }}" />
+    {%- endif %}
+
+    {% block before_head %}
+    {% endblock %}
   </head>
 
-  <body x-data="{ sidebar: false }">
-    <section
-      class="container mx-auto grid text-slate-700 lg:grid-cols-[1fr_3fr_1fr] lg:[grid-template-areas:'header_header_header''sidebar_main_aside']"
+  <body
+    class="container mx-auto text-slate-700"
+    {%- block body_attrs %}{% endblock %}
+  >
+    <header
+      class="grid grid-cols-3 items-center rounded-bl-lg rounded-br-lg border-b-2 border-l-2 border-r-2 border-slate-200 px-4 py-8"
     >
-      <header
-        class="flex h-16 items-center justify-between border-b border-slate-200 px-8 py-2 lg:px-0 lg:[grid-area:header]"
-      >
-        {% set button_classes %}
-          aspect-square h-4/5 rounded-lg border p-1 ring-0 ring-slate-200
-          hover:ring-slate-400 focus:outline-none focus:ring-4
-          focus:ring-slate-400 dark:border-blue-500 dark:hover:bg-blue-500
-          dark:focus:ring-blue-800"
-        {% endset %}
+      {# Header left third #}
+      <div>
+        {# Logo and docs title #}
+        {# <a><h1>, not <h1><a>, because then whole content box is clickable, not only image and text  #}
+        <a href="{{ pathto(root_doc)|e }}">
+          <h1>
+            {% if logo_url %}
+              <img
+                src="{{ logo_url|e }}"
+                alt="{{ logo_alt|e }}"
+                class="w-1/2"
+              />
+            {% endif %}
+            {{ docstitle }}
+          </h1>
+        </a>
+      </div>
 
-        {# Sidebar open/close toggle #}
-        <div class="h-4/5 content-center lg:hidden">
-          <button class="{{ button_classes }}" @click="sidebar = !sidebar">
-            <span class="sr-only">Sidebar open/close button</span>
-            <img
-              :alt="sidebar ? 'Close sidebar' : 'Open sidebar'"
-              :src="sidebar ? '{{ pathto("_static/images/close-sidebar-icon.svg", 1) }}' : '{{ pathto("_static/images/open-sidebar-icon.svg", 1) }}'"
-            />
-          </button>
-        </div>
-
-        <h1 class="h-full">
-          <a href="{{ pathto(root_doc)|e }}">
-            <img
-              class="max-h-full"
-              src="{{ logo_url|e }}"
-              alt="{{ logo_alt|e }}"
-            />
-          </a>
-        </h1>
-
-        {# Styles for all <input>s #}
-        {% set input_classes %}
-          rounded border-transparent bg-slate-50 p-1 text-xs ring-1
-          ring-slate-200 transition duration-200 placeholder:text-xs
-          hover:ring-2 hover:ring-slate-400 focus:outline-none focus:ring-4
-          focus:ring-slate-400
-        {% endset %}
-
-        <search class="hidden lg:block">
-          {# As macro because will be used twice (in sidebar on mobile) #}
+      {# Header middle third #}
+      <div class="justify-items-center">
+        <search>
+          {# As macro to be used used on more places in markup (e.g., in sidebar on mobile) #}
           {% set searchbox %}
             <form action="{{ pathto('search') }}" method="get">
               <input
                 type="text"
                 name="q"
-                placeholder="{{ _('Hledat') }}"
-                aria-label="{{ _('Vyhledávání v dokumentaci') }}"
+                placeholder="{{ _('Search') }}"
+                aria-label="{{ _('Search in content') }}"
                 spellcheck="false"
                 autocomplete="off"
                 autocorrect="off"
                 autocapitalize="off"
-                class="{{ input_classes }} h-4/5 w-60"
+                class="{{ input_classes }} h-4/5 w-60 bg-[url('/_static/icons/zoom-2.svg')] bg-[length:0.75rem] bg-[97%] bg-no-repeat pr-4"
               />
             </form>
           {% endset %}
+
+          {# Render searchbox here #}
           {{ searchbox }}
         </search>
+      </div>
 
-        {# Tlačítka vpravo nahoře #}
-        <ul class="flex h-4/5 gap-3">
-          {# Přepínač jazyků. {} is default value #}
+      {# Header right third #}
+      <div class="justify-items-end">
+        <ul class="flex gap-3">
+          {# Language switcher. {} is the default value. #}
           {% if theme_language_switcher != {} %}
-            <li class="flex items-center justify-center">
+            <li>
               <select
                 id="language-switcher"
                 class="{{ input_classes }} pr-8"
                 onchange="window.location.href = document.getElementById('language-switcher').value"
               >
-                {# loop over dict #}
+                {# loop over dict language_switcher in html_theme_options in conf.py #}
                 {% for code, label in theme_language_switcher.items() %}
                   <option
                     {# pathto() needs absolute path, but pagename returns string without "/" #}
@@ -104,72 +120,133 @@
             </li>
           {% endif %}
 
-          {# <li class="flex items-center justify-center">
-            <button class="{{ button_classes }}"">
+          <li>
+            <button class="{{ button_classes }}">
               <img
-                src="{{ pathto("_static/images/sun-icon.svg", 1) }}"
+                src="{{ pathto("_static/icons/dark-light.svg", 1) }}"
                 alt="Toggle dark/light mode"
+                class="h-[0.75lh]"
               />
             </button>
-          </li> #}
+          </li>
         </ul>
-      </header>
-
-      {# Mobile sidebar #}
-      <nav
-        class="mx-8 mt-6 text-xs lg:hidden"
-        x-cloak
-        x-show="sidebar"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 -translate-y-1/4"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 -translate-y-1/4"
-      >
-        <search class="mb-4 lg:hidden">{{ searchbox }}</search>
-
-        {{ basic.global_toc_component(titles_only=true) }}
-      </nav>
-
-      {# Desktop sidebar #}
-      <nav
-        class="mx-8 mt-6 hidden text-xs lg:mx-0 lg:block lg:border-r lg:border-slate-200 lg:[grid-area:sidebar]"
-      >
-        {{ basic.global_toc_component(titles_only=true) }}
-      </nav>
-
-      <main class="mx-8 pt-6 lg:[grid-area:main]">
-        <nav class="text-xs">
-          {{ basic.breadcrumb_component(root_label=project) }}
-        </nav>
-
-        {# role="main" required by built-in JavaScript search to show a page preview on the result page #}
-        <article role="main">{% block body %}{% endblock %}</article>
-
-        {{ basic.article_nav_component() }}
-      </main>
-
-      <aside class="mx-8 hidden pt-6 lg:mr-0 lg:block lg:[grid-area:aside]">
-        <div class="rounded-lg border border-slate-200 p-3 text-xs">
-          <p class="mb-4 font-semibold">Na této stránce</p>
-          {{ basic.local_toc_component() }}
-        </div>
-      </aside>
-    </section>
-
-    <footer class="flex h-40 flex-col justify-end">
-      <div class="container mx-auto mb-2 text-center text-xs">
-        {{ basic.copyright_component() }}
       </div>
+    </header>
+
+    {# Global ToC #}
+    <nav
+      class="global-toc mt-6 rounded-lg border border-slate-200 p-3 text-xs text-gray-700"
+    >
+      {{ toctree(collapse=true, maxdepth="", titles_only=true, includehidden=false) }}
+    </nav>
+
+    <main class="mt-6">
+      {# Breadcrumb navigation #}
+      <nav class="breadcrumb text-xs">
+        <ol>
+          {# Root #}
+          <li>
+            <a href="{{ pathto(root_doc)|e }}"> {{ shorttitle|e }} </a>
+          </li>
+
+          {# Path to current doc #}
+          {%- for parent in parents %}
+            <li class="my-1">
+              <a href="{{ parent.link|e }}"> {{ parent.title }} </a>
+            </li>
+          {%- endfor %}
+
+          {# Current doc #}
+          <li>
+            <a class="text-accent" href="{{ link|e }}"> {{ title }} </a>
+          </li>
+        </ol>
+      </nav>
+
+      {# Rendered document HTML will be placed here #}
+      {# role="main" required by built-in JavaScript search to show a page preview on the result page #}
+      <article role="main">{% block body %}{% endblock %}</article>
+
+      {# Article navigation #}
+      <nav class="mt-8">
+        <ul class="flex flex-wrap justify-between gap-2">
+          <li class="flex flex-col gap-1">
+            {% if prev %}
+              <span class="text-xs font-semibold text-[#5D6B7B]">
+                <img
+                  src="{{ pathto('_static/icons/arrow-left.svg', 1) }}"
+                  alt="{{ _('Previous article icon') }}"
+                  class="inline"
+                />
+                {{ _('Previous') }}
+              </span>
+              <span>
+                <a
+                  class="border-b-1 border-primary text-accent transition-all duration-200 hover:border-b-2 hover:border-accent hover:brightness-75"
+                  href="{{ prev.link|e }}"
+                  title="{{ _('Previous article') }}"
+                >
+                  {{ prev.title }}
+                </a>
+              </span>
+            {% endif %}
+          </li>
+          <li class="flex flex-col gap-1 lg:text-right">
+            {% if next %}
+              <span class="text-xs font-semibold text-[#5D6B7B]">
+                <img
+                  src="{{ pathto('_static/icons/arrow-right.svg', 1) }}"
+                  alt="{{ _('Next article icon') }}"
+                  class="inline"
+                />
+                {{ _('Next') }}
+              </span>
+              <span>
+                <a
+                  class="border-b-1 border-primary text-accent transition-all duration-200 hover:border-b-2 hover:border-accent hover:brightness-75"
+                  href="{{ next.link|e }}"
+                  title="{{ _('Next article') }}"
+                >
+                  {{ next.title }}
+                </a>
+              </span>
+            {% endif %}
+          </li>
+        </ul>
+      </nav>
+    </main>
+
+    {# Local ToC #}
+    <aside class="w-1/2 pt-6">
+      <div class="rounded-lg border border-slate-200 p-3 text-xs text-gray-700">
+        <p class="mb-4 font-semibold">On this page</p>
+        <div class="local-toc">{{ toc }}</div>
+      </div>
+    </aside>
+
+    {# Copyright #}
+    {# rounded-tl-lg rounded-tr-lg border-t-2 border-l-2 border-r-2 border-slate-200 px-4 py-8 #}
+    <footer
+      class="mt-8 content-center rounded-tl-lg rounded-tr-lg border-l-2 border-r-2 border-t-2 border-slate-200 px-4 py-8 text-center text-xs"
+    >
+      {%- if show_copyright %}
+        &copy; {{ copyright }}
+      {% endif %}
     </footer>
 
+    {# Scripts at the end improves page load speed #}
+    {# Insert <script>s requested by Sphinx, it's extensions or themes #}
+    {%- for js in script_files %}
+      {{ js_tag(js) }}
+    {%- endfor %}
+
+    {# Scripts requested by this theme #}
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
+    ></script>
+
     {% block before_body %}
-      <script
-        defer
-        src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
-      ></script>
-      {{ head.scripts_component() }}
     {% endblock %}
   </body>
 </html>

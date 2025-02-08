@@ -1,6 +1,10 @@
 /* ======================================================================== */
 /* Imports  */
 /* ======================================================================== */
+/* 
+Styles which are maximally neutral and can be used in any project. E.g., not text colors, etc.
+*/
+
 /* @import rules must appear at the very beginning */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -17,28 +21,13 @@
   :root {
     font-optical-sizing: auto;
   }
-
-  /* Search */
-  search input {
-    background-image: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%2020%2020%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M8.33366%203.33329C5.57224%203.33329%203.33366%205.57187%203.33366%208.33329C3.33366%2011.0947%205.57224%2013.3333%208.33366%2013.3333C11.0951%2013.3333%2013.3337%2011.0947%2013.3337%208.33329C13.3337%205.57187%2011.0951%203.33329%208.33366%203.33329ZM1.66699%208.33329C1.66699%204.65139%204.65176%201.66663%208.33366%201.66663C12.0156%201.66663%2015.0003%204.65139%2015.0003%208.33329C15.0003%209.87387%2014.4778%2011.2924%2013.6002%2012.4213L18.0896%2016.9107C18.415%2017.2361%2018.415%2017.7638%2018.0896%2018.0892C17.7641%2018.4147%2017.2365%2018.4146%2016.9111%2018.0892L12.4217%2013.5998C11.2928%2014.4774%209.87427%2015%208.33366%2015C4.65176%2015%201.66699%2012.0152%201.66699%208.33329Z%22%20fill=%22%235D6B7B%22%2F%3E%0A%3C%2Fsvg%3E%0A");
-    background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    background-size: 1rem;
-    /* Prevent entered text to reach icon on the right */
-    padding-right: 2rem;
-  }
-
-  footer {
-    --bg-img: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%201060%20281%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cg%20opacity=%220.08%22%3E%0A%3Cmask%20id=%22mask0_170_859%22%20style=%22mask-type%3Aalpha%22%20maskUnits=%22userSpaceOnUse%22%20x=%22-402%22%20y=%22100%22%20width=%221418%22%20height=%221435%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M1010.99%20508.328L849.374%201331.91L849.373%201331.92C836.512%201397.46%20797.971%201455.15%20742.206%201492.32C686.45%201529.51%20618.065%201543.12%20552.068%201530.17L6.32915%201423.08C-83.8415%201405.4%20-159.254%201344.14%20-194.639%201259.84L-194.636%201259.83L-380.586%20817.072C-401.466%20767.32%20-407.082%20712.582%20-396.714%20659.744C-386.345%20606.906%20-360.458%20558.35%20-322.325%20520.177L-322.323%20520.163L17.1609%20180.513C81.778%20115.842%20174.749%2087.6255%20264.914%20105.334L810.652%20212.426C876.653%20225.377%20934.82%20263.821%20972.387%20319.323C1009.97%20374.816%201023.85%20442.794%201010.99%20508.328Z%22%20fill=%22black%22%2F%3E%0A%3C%2Fmask%3E%0A%3Cg%20mask=%22url(%23mask0_170_859)%22%3E%0A%3Cellipse%20cx=%22398.197%22%20cy=%22705.182%22%20rx=%221019.89%22%20ry=%22957.809%22%20transform=%22rotate(-78.8978%20398.197%20705.182)%22%20fill=%22url(%23paint0_linear_170_859)%22%2F%3E%0A%3Cellipse%20cx=%22798.377%22%20cy=%221404.52%22%20rx=%221209.47%22%20ry=%221135.85%22%20transform=%22rotate(-78.8978%20798.377%201404.52)%22%20fill=%22url(%23paint1_linear_170_859)%22%20fill-opacity=%220.3%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id=%22paint0_linear_170_859%22%20x1=%22-322.379%22%20y1=%221662.99%22%20x2=%222042.1%22%20y2=%22-1442.49%22%20gradientUnits=%22userSpaceOnUse%22%3E%0A%3Cstop%20stop-color=%22%2336B4A3%22%2F%3E%0A%3Cstop%20offset=%221%22%20stop-color=%22%2336B4A3%22%2F%3E%0A%3C%2FlinearGradient%3E%0A%3ClinearGradient%20id=%22paint1_linear_170_859%22%20x1=%221412.71%22%20y1=%22530.098%22%20x2=%221079.96%22%20y2=%221865.62%22%20gradientUnits=%22userSpaceOnUse%22%3E%0A%3Cstop%20stop-color=%22white%22%2F%3E%0A%3Cstop%20offset=%220.683939%22%20stop-color=%22white%22%20stop-opacity=%220%22%2F%3E%0A%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%0A%3C%2Fsvg%3E%0A");
-    background:
-      var(--bg-img) no-repeat,
-      var(--bg-img) no-repeat 65%;
-  }
 }
 
 @layer components {
   /* === Global ToC ======================================================== */
   .global-toc {
+    @apply text-xs;
+
     li.toctree-l1:first-child {
       @apply mt-0;
     }
@@ -66,22 +55,24 @@
     .toctree-l2.current > ul {
       @apply my-4 ml-2 text-sm;
     }
+    /* Captions */
+    .caption {
+      @apply mb-2 mt-4 text-base font-semibold tracking-wider;
+    }
   }
 
   /* === Local ToC ========================================================= */
   .local-toc {
-    @apply text-gray-700;
-
     /* Hide very first li because it's page title */
     & > ul > li > a {
       @apply hidden;
     }
     li:not(:last-child) {
-      @apply mb-2;
+      @apply mb-1;
     }
     /* L2 and more */
     & > ul > li > ul ul {
-      @apply ml-4 mt-2;
+      @apply ml-4 mt-1;
     }
     a {
       @apply transition-all duration-200;
@@ -93,18 +84,19 @@
 
   /* === Breadcrumb ======================================================== */
   .breadcrumb {
-    @apply flex flex-wrap font-semibold;
+    ol,
+    ul {
+      @apply flex flex-wrap font-semibold;
 
-    li {
-      @apply my-1;
-    }
-    /* delimiter */
-    li:not(:last-child)::after {
-      content: "/";
-      @apply mx-1 text-slate-300;
-    }
-    .breadcrumb__item--active {
-      @apply text-accent;
+      li {
+        @apply my-1;
+      }
+
+      /* delimiter */
+      li:not(:last-child)::after {
+        content: "/";
+        @apply mx-1 text-slate-300;
+      }
     }
   }
 }
@@ -207,7 +199,7 @@ main article {
 
   /* every h1 */
   h1 {
-    @apply bg-secondary border-secondary mt-8 px-6 pt-6 text-neutral-50;
+    @apply border-secondary text-secondary mt-8 border-l-2 border-r-2 border-t-2 px-6 pt-6;
   }
 
   /* h1 followed by p */
@@ -223,7 +215,7 @@ main article {
 
   /* p preceded by h1 */
   h1 + p {
-    @apply bg-secondary border-secondary mt-0 rounded-b-lg px-6 pb-6 pt-0 text-neutral-50;
+    @apply border-secondary text-secondary mt-0 rounded-b-lg border-b-2 border-l-2 border-r-2 px-6 pb-6 pt-0;
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1.5;
@@ -348,7 +340,7 @@ main article {
   .admonition {
     /* overflow-hidden is crutial to do not overflow title's background */
     /* after adds clear utility */
-    @apply my-6 overflow-hidden rounded-lg border border-[#d5eeea] after:clear-both after:block after:content-[""];
+    @apply border-secondary my-6 overflow-hidden rounded-lg border after:clear-both after:block after:content-[""];
   }
   /* Set left and right margin to every direct child except the title */
   .admonition > *:not(.admonition-title) {
@@ -356,14 +348,14 @@ main article {
   }
 
   .admonition-title {
-    @apply flex bg-[#d5eeea] p-2 font-bold text-[#2EAB9A];
+    @apply text-secondary flex bg-slate-100 p-2 font-bold;
     &::before {
       content: "";
       height: 1lh;
       aspect-ratio: 1/1;
       margin-left: 0.5rem;
       margin-right: 0.5em;
-      background-image: var(--see-also-icon);
+      background-image: url("/_static/icons/lightbulb-3.svg");
       background-size: contain;
       background-repeat: no-repeat;
     }

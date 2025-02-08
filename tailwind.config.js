@@ -13,9 +13,10 @@ module.exports = {
     extend: {
       colors: {
         text: "#2d4044",
-        primary: "#d5eeea",
-        secondary: "#24887b",
-        accent: "#2eab9a",
+        background: "#FAF8FC",
+        primary: "#0072F5",
+        secondary: "#0C7CBA",
+        accent: "#0C7CBA",
       },
       fontFamily: {
         text: ["Inter", "sans-serif"],
