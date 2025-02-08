@@ -57,7 +57,7 @@ Styles which are maximally neutral and can be used in any project. E.g., not tex
     }
     /* Captions */
     .caption {
-      @apply mb-2 mt-4 text-base font-semibold tracking-wider;
+      @apply mb-2 mt-6 text-base font-semibold tracking-wide;
     }
   }
 
@@ -199,27 +199,26 @@ main article {
 
   /* every h1 */
   h1 {
-    @apply border-secondary text-secondary mt-8 border-l-2 border-r-2 border-t-2 px-6 pt-6;
+    @apply text-secondary my-12;
   }
 
   /* h1 followed by p */
-  h1:has(+ p) {
-    @apply mb-0 rounded-t-lg pb-6;
-  }
+  /* h1:has(+ p) {
+  } */
 
   /* h1 not followed by p */
-  h1:not(:has(+ p)) {
-    @apply rounded-lg border-2 pb-6;
-    margin-bottom: var(--para-margin-bottom);
-  }
+  /* h1:not(:has(+ p)) {
+  } */
 
   /* p preceded by h1 */
   h1 + p {
-    @apply border-secondary text-secondary mt-0 rounded-b-lg border-b-2 border-l-2 border-r-2 px-6 pb-6 pt-0;
+    @apply text-secondary my-12;
+
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1.5;
 
+    /* Links in excerpt */
     a {
       @apply !text-inherit;
       &:hover {
@@ -335,8 +334,6 @@ main article {
   }
 
   /* === Admonition ======================================================== */
-  --see-also-icon: url("data:image/svg+xml, %3Csvg%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule=%22evenodd%22%20clip-rule=%22evenodd%22%20d=%22M12%201C12.5523%201%2013%201.44772%2013%202V3C13%203.55228%2012.5523%204%2012%204C11.4477%204%2011%203.55228%2011%203V2C11%201.44772%2011.4477%201%2012%201ZM4.1928%204.1928C4.58332%203.80227%205.21648%203.80227%205.60701%204.1928L6.20711%204.79289C6.59763%205.18342%206.59763%205.81658%206.20711%206.20711C5.81658%206.59763%205.18342%206.59763%204.79289%206.20711L4.1928%205.60701C3.80227%205.21648%203.80227%204.58332%204.1928%204.1928ZM19.8074%204.19288C20.1979%204.58346%2020.1978%205.21662%2019.8073%205.6071L19.207%206.2072C18.8164%206.59767%2018.1833%206.59759%2017.7928%206.20702C17.4023%205.81644%2017.4024%205.18328%2017.793%204.7928L18.3932%204.19271C18.7838%203.80223%2019.417%203.80231%2019.8074%204.19288ZM12%207C9.23858%207%207%209.23858%207%2012C7%2014.7614%209.23858%2017%2012%2017C14.7614%2017%2017%2014.7614%2017%2012C17%209.23858%2014.7614%207%2012%207ZM5%2012C5%208.13401%208.13401%205%2012%205C15.866%205%2019%208.13401%2019%2012C19%2014.7924%2017.3649%2017.2029%2015%2018.3264V20C15%2021.6569%2013.6569%2023%2012%2023C10.3431%2023%209%2021.6569%209%2020V18.3264C6.63505%2017.2029%205%2014.7924%205%2012ZM11%2018.9291V20C11%2020.5523%2011.4477%2021%2012%2021C12.5523%2021%2013%2020.5523%2013%2020V18.9291C12.6734%2018.9758%2012.3395%2019%2012%2019C11.6605%2019%2011.3266%2018.9758%2011%2018.9291ZM1%2012C1%2011.4477%201.44772%2011%202%2011H3C3.55228%2011%204%2011.4477%204%2012C4%2012.5523%203.55228%2013%203%2013H2C1.44772%2013%201%2012.5523%201%2012ZM20%2012C20%2011.4477%2020.4477%2011%2021%2011H22C22.5523%2011%2023%2011.4477%2023%2012C23%2012.5523%2022.5523%2013%2022%2013H21C20.4477%2013%2020%2012.5523%2020%2012Z%22%20fill=%22%232EAB9A%22%2F%3E%0A%3C%2Fsvg%3E%0A");
-
   .admonition {
     /* overflow-hidden is crutial to do not overflow title's background */
     /* after adds clear utility */
@@ -370,11 +367,17 @@ main article {
       @apply ml-4;
     }
   }
-}
 
-/* ==== Code examples ====================================================== */
-code {
-  @apply rounded border border-dotted border-gray-300 bg-gray-100 p-[0.15em] text-sm text-rose-600;
+  /* ==== Code examples ==================================================== */
+  code {
+    @apply rounded border border-dotted border-gray-300 bg-gray-100 p-[0.15em] text-sm text-rose-600;
+  }
+
+  /* ==== Horizontal rule ================================================== */
+  hr {
+    margin-top: var(--para-margin-bottom);
+    margin-bottom: var(--para-margin-bottom);
+  }
 }
 
 /* ======================================================================== */
