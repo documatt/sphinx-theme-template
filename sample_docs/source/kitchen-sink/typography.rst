@@ -64,3 +64,13 @@ Heading 6 with content
 Lorem ipsum **dolor** sit amet consectetur adipisicing elit.
 
 Accusamus, sunt voluptatum tenetur libero nulla esse veritatis accusantium earum commodi hic voluptatem officia culpa optio atque. Quaerat sed quibusdam ratione nam.
+
+
+Horizontal Rules
+================
+
+This section will explore how horizontal rules look. Think about how the content separation should work, and how the horizontal rules should interact with the main content.
+
+-------------------------------------------------
+
+Accusamus, sunt voluptatum tenetur libero nulla esse veritatis accusantium earum commodi hic voluptatem officia culpa optio atque. Quaerat sed quibusdam ratione nam.

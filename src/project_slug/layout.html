@@ -16,6 +16,7 @@
 <html
   {% if language is not none %}lang="{{ language }}"{% endif %}
   data-content_root="{{ content_root }}"
+  {%- block html_attrs %}{% endblock %}
 >
   <head>
     <title>{{ title|striptags|e }} &mdash; {{ docstitle|e }}</title>

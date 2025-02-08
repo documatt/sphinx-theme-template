@@ -7,7 +7,7 @@ Styles which are maximally neutral and can be used in any project. E.g., not tex
 
 /* @import rules must appear at the very beginning */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* ======================================================================== */
 /* Tailwind  */
@@ -59,6 +59,22 @@ Styles which are maximally neutral and can be used in any project. E.g., not tex
     .caption {
       @apply mb-2 mt-6 text-base font-semibold tracking-wide;
     }
+
+    /* Links */
+    a {
+      @apply transition-all duration-200;
+      &:hover {
+        @apply border-b border-black;
+      }
+    }
+
+    /* External links */
+    a.external::after {
+      display: inline-block;
+      content: url("/_static/icons/arrow-up-right_toc.svg");
+      width: 1cap;
+      height: 1cap;
+    }
   }
 
   /* === Local ToC ========================================================= */
@@ -68,11 +84,11 @@ Styles which are maximally neutral and can be used in any project. E.g., not tex
       @apply hidden;
     }
     li:not(:last-child) {
-      @apply mb-1;
+      @apply mb-2;
     }
     /* L2 and more */
     & > ul > li > ul ul {
-      @apply ml-4 mt-1;
+      @apply ml-4 mt-2;
     }
     a {
       @apply transition-all duration-200;
@@ -96,6 +112,13 @@ Styles which are maximally neutral and can be used in any project. E.g., not tex
       li:not(:last-child)::after {
         content: "/";
         @apply mx-1 text-slate-300;
+      }
+
+      a {
+        @apply transition-all duration-200;
+        &:hover {
+          @apply border-b border-black;
+        }
       }
     }
   }
@@ -137,6 +160,7 @@ main article {
   font-variant-numeric: oldstyle-nums;
   font-size: var(--text-size);
   color: var(--text-color);
+  font-family: var(--text-font);
 
   /* === Headings ========================================================== */
   /* And rubric */
@@ -154,6 +178,7 @@ main article {
     color: var(--heading-color);
     transition: color 0.5s ease;
     font-weight: 600;
+    font-family: var(--heading-font);
   }
 
   /* === Heading scale === */
@@ -214,6 +239,7 @@ main article {
   h1 + p {
     @apply text-secondary my-12;
 
+    font-family: var(--heading-font);
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1.5;
@@ -222,7 +248,7 @@ main article {
     a {
       @apply !text-inherit;
       &:hover {
-        @apply !border-b-2 !border-neutral-50 !filter-none;
+        @apply !border-secondary !border-b-2 !filter-none;
       }
     }
   }
@@ -248,7 +274,7 @@ main article {
   /* === External links === */
   a.external::after {
     display: inline-block;
-    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='%237dcabf'%3E%3Cline x1='4' y1='16' x2='16' y2='4' fill='none' stroke='%237dcabf' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3C/line%3E%3Cpolyline points='16 11 16 4 9 4' fill='none' stroke='%237dcabf' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
+    content: url("/_static/icons/arrow-up-right.svg");
     width: 1cap;
     height: 1cap;
   }
@@ -281,7 +307,7 @@ main article {
     border-collapse: separate;
 
     border-radius: var(--table-radius);
-    border: 1px solid theme(colors.slate.200);
+    border: 1px solid theme(colors.secondary);
     /* Reduce gap among cells */
     border-spacing: 0;
     margin: var(--para-margin-bottom) 0;
@@ -289,9 +315,10 @@ main article {
 
   /* Heading */
   thead th {
-    background: theme(colors.gray.100);
-    border-bottom: 1px solid theme(colors.slate.200);
+    border-bottom: 1px solid theme(colors.secondary);
+    background-color: theme(colors.slate.100);
     text-align: left;
+    color: theme(colors.secondary);
   }
 
   /* Heading first and last cell needs to be custom shaped borders */
@@ -316,6 +343,7 @@ main article {
   ul,
   ol {
     padding: 0 0 0 2rem;
+    margin: var(--para-margin-bottom) 0;
   }
   ol {
     list-style: decimal outside;
@@ -330,21 +358,31 @@ main article {
 
   /* === Images ============================================================ */
   img {
-    margin: var(--para-margin-bottom) 0;
+    /* Tailwind resets all img to block, but browser default is inline */
+    display: inline;
   }
 
-  /* === Admonition ======================================================== */
-  .admonition {
+  /* === Figures =========================================================== */
+  figcaption {
+    @apply text-sm italic text-slate-500;
+  }
+
+  /* === Admonition & sidebars ============================================= */
+  .admonition,
+  .sidebar {
     /* overflow-hidden is crutial to do not overflow title's background */
     /* after adds clear utility */
     @apply border-secondary my-6 overflow-hidden rounded-lg border after:clear-both after:block after:content-[""];
   }
+
   /* Set left and right margin to every direct child except the title */
-  .admonition > *:not(.admonition-title) {
+  .admonition > *:not(.admonition-title),
+  .sidebar > *:not(.sidebar-title) {
     @apply mx-6;
   }
 
-  .admonition-title {
+  .admonition-title,
+  .sidebar-title {
     @apply text-secondary flex bg-slate-100 p-2 font-bold;
     &::before {
       content: "";
@@ -358,6 +396,8 @@ main article {
     }
   }
 
+  /* === Definition lists ================================================== */
+  dl,
   /* === Glossary ========================================================== */
   dl.glossary {
     dt {
@@ -375,8 +415,10 @@ main article {
 
   /* ==== Horizontal rule ================================================== */
   hr {
-    margin-top: var(--para-margin-bottom);
-    margin-bottom: var(--para-margin-bottom);
+    margin: calc(var(--para-margin-bottom) * 2) 0;
+    color: theme(colors.text);
+    border-width: 2px;
+    border-radius: 1rem;
   }
 }
 

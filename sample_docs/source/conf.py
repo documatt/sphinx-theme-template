@@ -11,5 +11,6 @@ html_theme = "project_slug"
 locale_dirs = ["locales/"]
 
 html_logo = "_static/logo.svg"
+html_favicon = "_static/favicon.svg"
 
 html_theme_options = {"language_switcher": {"en": "English", "ja": "Japanese"}}

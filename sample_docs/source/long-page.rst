@@ -71,7 +71,7 @@ luctus efficitur arcu. Cras ut dictum mi. Nulla congue interdum lorem, semper se
 Document Subsection
 -------------------
 
-.. figure:: https://source.unsplash.com/200x200/daily?cute+animals
+.. figure:: /kitchen-sink/img/flouffy-VBkIK3qj3QE-unsplash.jpg
     :align: right
     :figwidth: 200px
 
