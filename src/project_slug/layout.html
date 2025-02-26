@@ -277,12 +277,14 @@
       {# .Article navigation #}
     </main>
 
-    {# Local ToC #}
+    {# Minor (right) sidebar #}
     <aside class="hidden lg:block lg:[grid-area:aside]">
-      <div class="p-3 text-xs text-gray-700">
-        <p class="mb-4 font-semibold">On this page</p>
-        <div class="local-toc">{{ toc }}</div>
-      </div>
+      {% if has_local_toc %}
+        <div class="p-3 text-xs text-gray-700">
+          <p class="mb-4 font-semibold">On this page</p>
+          <div class="local-toc">{{ toc }}</div>
+        </div>
+      {% endif %}
     </aside>
 
     {# Copyright #}

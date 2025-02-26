@@ -4,6 +4,7 @@ version = "0.1.0"
 readme = "README.md"
 description = "Your new cool Sphinx theme"
 dependencies = [
+    "beautifulsoup4>=4.13.3",
     "sphinx>=8.0",
 ]
 requires-python = ">=3.11"
