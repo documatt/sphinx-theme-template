@@ -19,8 +19,8 @@ project_name:
 
 project_slug:
   type: str
-  default: "{{ project_name|lower|replace(' ', '-') }}"
-  help: The name for machines. Like 'sphinx-foo-theme'. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
+  default: "{{ project_name|lower|replace(' ', '_') }}"
+  help: The name for machines. Like 'sphinx_foo_theme'. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
   validator: >-
     {% if not project_slug.strip() %}
     Invalid value
