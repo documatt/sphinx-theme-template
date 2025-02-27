@@ -1,20 +1,38 @@
 # Template lives in
 _subdirectory: template
 
+# Exclude Sphinx static templates
+# Sphinx static templates also use .jinja suffix. Copier thinks they are Copier templates and tries to render them.
+# I tried to exclude Sphinx static templates with _exclude, but nothing worked for me.
+# See https://github.com/orgs/copier-org/discussions/1992.
+# Therefore, I decided to change default Copier template extensions from .jinja to .copier
+_templates_suffix: ".copier"
+
 # Questions
 project_name:
   type: str
-  default:
   help: The name for humans. We recommend the form "Sphinx <Name> Theme", e.g. 'Sphinx Foo Theme'.
+  validator: >-
+    {% if not project_name.strip() %}
+    Invalid value
+    {% endif %}
 
 project_slug:
   type: str
   default: "{{ project_name|lower|replace(' ', '-') }}"
   help: The name for machines. Like 'sphinx-foo-theme'. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
+  validator: >-
+    {% if not project_slug.strip() %}
+    Invalid value
+    {% endif %}
 
 description:
   type: str
   help: A short description of the theme.
+  validator: >-
+    {% if not description.strip() %}
+    Invalid value
+    {% endif %}
 
 sample_docs_slug:
   type: str
