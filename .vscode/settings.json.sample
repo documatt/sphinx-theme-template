@@ -22,6 +22,12 @@
   "python.testing.pytestArgs": ["-vv", "--color=yes"],
 
   "files.associations": {
-    "copier.yaml": "jinja-yaml"
+    "copier.yaml": "jinja-yaml",
+    "**/template/**/*.py.copier": "jinja-py",
+    "**/template/**/*.toml.copier": "jinja-toml",
+    "**/template/**/uv.lock.copier": "jinja-toml",
+    "**/template/**/*.md.copier": "jinja-md",
+    "**/template/**/*.json.copier": "jinja-json",
+    "**/template/**/*.html": "jinja-html"
   }
 }
