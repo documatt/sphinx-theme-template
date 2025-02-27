@@ -8,7 +8,6 @@ __pycache__
 .pytest_cache/
 dist/
 wheels/
-.ruff_cache
 
 # Sphinx
 build
@@ -23,5 +22,5 @@ node_modules
 
 # editors
 .idea/
-!.vscode/*.sample
 .vscode/*
+!.vscode/*.sample

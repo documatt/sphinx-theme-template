@@ -1,0 +1,22 @@
+# Template lives in
+_subdirectory: template
+
+# Questions
+project_name:
+  type: str
+  default:
+  help: The name for humans. We recommend the form "Sphinx <Name> Theme", e.g. 'Sphinx Foo Theme'.
+
+project_slug:
+  type: str
+  default: "{{ project_name|lower|replace(' ', '-') }}"
+  help: The name for machines. Like 'sphinx-foo-theme'. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
+
+description:
+  type: str
+  help: A short description of the theme.
+
+sample_docs_slug:
+  type: str
+  default: "sample_docs"
+  help: The name for the sample docs folder. Must be a valid folder name. We recommend do not use spaces, special characters, etc.

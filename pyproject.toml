@@ -1,40 +1,9 @@
 [project]
-name = "project_slug"
+name = "sphinx-theme-template"
 version = "0.1.0"
+description = "A Copier template for creating modern Sphinx documentation themes with Tailwind CSS. It offers a rich developer experience in VS Code, debugging, and automatic live reloading upon changes."
 readme = "README.md"
-description = "Your new cool Sphinx theme"
-dependencies = [
-    "beautifulsoup4>=4.13.3",
-    "sphinx>=8.0",
-]
 requires-python = ">=3.11"
-classifiers = [
-    "Framework :: Sphinx",
-    "Framework :: Sphinx :: Theme",
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Web Environment",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
-    "Topic :: Documentation",
-    "Topic :: Software Development :: Documentation",
+dependencies = [
+    "copier>=9.5.0",
 ]
-
-# Register the theme into Sphinx
-[project.entry-points."sphinx.html_themes"]
-project_slug = "project_slug"
-
-# Dev dependencies
-[dependency-groups]
-dev = [
-    "pytest>=8.3.4",
-    "nox>=2024.10.9",
-    "sample-docs",
-]
-
-[tool.uv.sources]
-# sample-docs is dev dependency from sample_docs/ directory
-sample-docs = { path = "sample_docs", editable = true }
-
-[build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"

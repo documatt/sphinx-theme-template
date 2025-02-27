@@ -1,0 +1,40 @@
+[project]
+name = "{{ project_slug }}"
+version = "0.1.0"
+readme = "README.md"
+description = "{{ description }}"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "sphinx>=8.0",
+]
+requires-python = ">=3.11"
+classifiers = [
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Theme",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Documentation",
+]
+
+# Register the theme into Sphinx
+[project.entry-points."sphinx.html_themes"]
+{{ project_slug }} = "{{ project_slug }}"
+
+# Dev dependencies
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "nox>=2024.10.9",
+    "sample-docs",
+]
+
+[tool.uv.sources]
+# sample-docs is dev dependency from {{ sample_docs_slug }}/ directory
+sample-docs = { path = "{{ sample_docs_slug }}", editable = true }
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
