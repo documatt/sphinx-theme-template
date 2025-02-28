@@ -1,0 +1,441 @@
+/* ======================================================================== */
+/* Imports  */
+/* ======================================================================== */
+/* 
+Styles which are maximally neutral and can be used in any project. E.g., not text colors, etc.
+*/
+
+/* @import rules must appear at the very beginning */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ======================================================================== */
+/* Tailwind  */
+/* ======================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-optical-sizing: auto;
+  }
+}
+
+@layer components {
+  /* === Global ToC ======================================================== */
+  .global-toc {
+    @apply text-xs;
+
+    li.toctree-l1:first-child {
+      @apply mt-0;
+    }
+    /* L1 */
+    li.toctree-l1 {
+      @apply my-2 font-bold;
+      li {
+        @apply mt-2;
+      }
+    }
+    /* Active page childs */
+    li.toctree-l1.current {
+      > a {
+        @apply text-accent;
+      }
+      > ul {
+        @apply border-l-accent my-4 border-l-2 pl-4 font-normal;
+      }
+    }
+    /* Active page */
+    li.toctree-l1 a.current {
+      @apply text-accent font-semibold;
+    }
+    /* L3 */
+    .toctree-l2.current > ul {
+      @apply my-4 ml-2 text-sm;
+    }
+    /* Captions */
+    .caption {
+      @apply mb-2 mt-6 text-base font-semibold tracking-wide;
+    }
+
+    /* Links */
+    a {
+      @apply transition-all duration-200;
+      &:hover {
+        @apply border-b border-black;
+      }
+    }
+
+    /* External links */
+    a.external::after {
+      display: inline-block;
+      content: url("/_static/icons/arrow-up-right_toc.svg");
+      width: 1cap;
+      height: 1cap;
+    }
+  }
+
+  /* === Local ToC ========================================================= */
+  .local-toc {
+    /* Hide very first li because it's page title */
+    & > ul > li > a {
+      @apply hidden;
+    }
+    li:not(:last-child) {
+      @apply mb-2;
+    }
+    /* L2 and more */
+    & > ul > li > ul ul {
+      @apply ml-4 mt-2;
+    }
+    a {
+      @apply transition-all duration-200;
+      &:hover {
+        @apply border-b border-black;
+      }
+    }
+  }
+
+  /* === Breadcrumb ======================================================== */
+  .breadcrumb {
+    ol,
+    ul {
+      @apply flex flex-wrap font-semibold;
+
+      li {
+        @apply my-1;
+      }
+
+      /* delimiter */
+      li:not(:last-child)::after {
+        content: "/";
+        @apply mx-1 text-slate-300;
+      }
+
+      a {
+        @apply transition-all duration-200;
+        &:hover {
+          @apply border-b border-black;
+        }
+      }
+    }
+  }
+}
+
+@layer utilities {
+}
+
+/* ======================================================================== */
+/* Always include */
+/* ======================================================================== */
+/* When used without @layer, styles are always included even if not used (no three-shaking applied) */
+
+/* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
+[x-cloak=""] {
+  display: none;
+}
+
+/* ======================================================================== */
+/* Sphinx generated content */
+/* ======================================================================== */
+main article {
+  /* === Basic ============================================================= */
+
+  /* === Settings === */
+  --text-color: theme("colors.text");
+  --primary-color: theme("colors.primary");
+  --secondary-color: theme("colors.secondary");
+  --accent-color: theme("colors.accent");
+
+  --text-font: theme("fontFamily.text");
+  --text-size: 1rem;
+
+  --heading-font: theme("fontFamily.heading");
+  --heading-color: var(--text-color);
+  --heading-scale: 1.2;
+
+  /* === Etc === */
+  font-variant-numeric: oldstyle-nums;
+  font-size: var(--text-size);
+  color: var(--text-color);
+  font-family: var(--text-font);
+
+  /* === Headings ========================================================== */
+  /* And rubric */
+
+  /* === All headings === */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .rubric {
+    line-height: 1;
+    margin: 2.5rem 0 1rem;
+    color: var(--heading-color);
+    transition: color 0.5s ease;
+    font-weight: 600;
+    font-family: var(--heading-font);
+  }
+
+  /* === Heading scale === */
+  h1 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+    margin-top: 2rem;
+  }
+
+  h2 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h3 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h4 {
+    /* prettier-ignore */
+    font-size: calc(var(--text-size) * var(--heading-scale) * var(--heading-scale));
+  }
+
+  h5 {
+    font-size: calc(var(--text-size) * var(--heading-scale));
+  }
+
+  h6,
+  .rubric {
+    font-size: var(--text-size);
+  }
+
+  /* === Paragraphs ======================================================== */
+  --para-margin-bottom: 1rem;
+
+  p {
+    margin-bottom: var(--para-margin-bottom);
+    line-height: 1.65;
+  }
+
+  /* === Excerpt =========================================================== */
+
+  /* every h1 */
+  h1 {
+    @apply text-secondary my-12;
+  }
+
+  /* h1 followed by p */
+  /* h1:has(+ p) {
+  } */
+
+  /* h1 not followed by p */
+  /* h1:not(:has(+ p)) {
+  } */
+
+  /* p preceded by h1 */
+  h1 + p {
+    @apply text-secondary my-12;
+
+    font-family: var(--heading-font);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.5;
+
+    /* Links in excerpt */
+    a {
+      @apply !text-inherit;
+      &:hover {
+        @apply !border-secondary !border-b-2 !filter-none;
+      }
+    }
+  }
+
+  /* === Links ============================================================= */
+
+  /* Just links. No permalinks and image links */
+  /* <a> tags not followed by <img> and not inside <h1>-<h6> */
+  a:not(:has(> img)):not(h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a) {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid var(--primary-color);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(0.8); /* Darken the color by 20% */
+      border-bottom-color: var(--accent-color);
+      border-bottom-width: 2px;
+    }
+  }
+
+  /* === External links === */
+  a.external::after {
+    display: inline-block;
+    content: url("/_static/icons/arrow-up-right.svg");
+    width: 1cap;
+    height: 1cap;
+  }
+
+  /* === Permalinks === */
+  /* Hide all permalinks */
+  a.headerlink {
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Until heading hovered */
+  h2:hover,
+  h3:hover,
+  h4:hover,
+  h5:hover,
+  h6:hover {
+    a.headerlink {
+      visibility: visible;
+      color: var(--accent-color);
+      padding-left: 0.15em;
+    }
+  }
+
+  /* === Tables ============================================================ */
+  --table-radius: 0.5rem;
+
+  table {
+    /* Table needs to be have "separate" borders" to draw rounded border. */
+    border-collapse: separate;
+
+    border-radius: var(--table-radius);
+    border: 1px solid theme(colors.secondary);
+    /* Reduce gap among cells */
+    border-spacing: 0;
+    margin: var(--para-margin-bottom) 0;
+  }
+
+  /* Heading */
+  thead th {
+    border-bottom: 1px solid theme(colors.secondary);
+    background-color: theme(colors.slate.100);
+    text-align: left;
+    color: theme(colors.secondary);
+  }
+
+  /* Heading first and last cell needs to be custom shaped borders */
+  thead th:first-child {
+    border-radius: var(--table-radius) 0 0 0;
+  }
+  thead th:last-child {
+    border-radius: 0 var(--table-radius) 0 0;
+  }
+
+  th,
+  td {
+    padding: 1rem 1rem 0;
+  }
+
+  /* Horizontal border except for the last row */
+  tbody :not(tr:last-child) td {
+    border-bottom: 1px solid theme(colors.slate.200);
+  }
+
+  /* === Lists ============================================================= */
+  ul,
+  ol {
+    padding: 0 0 0 2rem;
+    margin: var(--para-margin-bottom) 0;
+  }
+  ol {
+    list-style: decimal outside;
+  }
+  ul {
+    list-style: disc outside;
+  }
+  /* Remove extra margin of <p> inside <li>s */
+  li p {
+    margin-bottom: 0.5rem;
+  }
+
+  /* === Images ============================================================ */
+  img {
+    /* Tailwind resets all img to block, but browser default is inline */
+    display: inline;
+  }
+
+  /* === Figures =========================================================== */
+  figcaption {
+    @apply text-sm italic text-slate-500;
+  }
+
+  /* === Admonition & sidebars ============================================= */
+  .admonition,
+  .sidebar {
+    /* overflow-hidden is crutial to do not overflow title's background */
+    /* after adds clear utility */
+    @apply border-secondary my-6 overflow-hidden rounded-lg border after:clear-both after:block after:content-[""];
+  }
+
+  /* Set left and right margin to every direct child except the title */
+  .admonition > *:not(.admonition-title),
+  .sidebar > *:not(.sidebar-title) {
+    @apply mx-6;
+  }
+
+  .admonition-title,
+  .sidebar-title {
+    @apply text-secondary flex bg-slate-100 p-2 font-bold;
+    &::before {
+      content: "";
+      height: 1lh;
+      aspect-ratio: 1/1;
+      margin-left: 0.5rem;
+      margin-right: 0.5em;
+      background-image: url("/_static/icons/lightbulb-3.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  /* === Definition lists ================================================== */
+  dl,
+  /* === Glossary ========================================================== */
+  dl.glossary {
+    dt {
+      @apply font-bold;
+    }
+    dd {
+      @apply ml-4;
+    }
+  }
+
+  /* ==== Code examples ==================================================== */
+  code {
+    @apply rounded border border-dotted border-gray-300 bg-gray-100 p-[0.15em] text-sm text-rose-600;
+  }
+
+  /* ==== Horizontal rule ================================================== */
+  hr {
+    margin: calc(var(--para-margin-bottom) * 2) 0;
+    color: theme(colors.text);
+    border-width: 2px;
+    border-radius: 1rem;
+  }
+}
+
+/* ======================================================================== */
+/* Sphinx search */
+/* ======================================================================== */
+
+.highlighted {
+  @apply rounded border border-dotted border-gray-300 bg-yellow-200;
+}
+
+/* Search page results */
+#search-results ul {
+  /* Display as vertical grid */
+  @apply grid list-none grid-cols-1 gap-4 p-0;
+
+  li a {
+    @apply text-xl;
+  }
+}

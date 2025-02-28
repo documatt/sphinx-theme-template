@@ -9,12 +9,11 @@ from pathlib import Path
 
 from copier import run_copy
 from deep_dircmp import DeepDirCmp
-from freezegun import freeze_time
 
 PROJECT_ROOT = str(Path(__file__).parent.parent)
 
 # Sync with the date in tests/test_bake/defaults/CHANGELOG.md
-FROZEN_TEST_DATE = "2025-01-25"
+# FROZEN_TEST_DATE = "2025-01-25"
 
 
 def deep_compare_dirs(
@@ -80,95 +79,38 @@ def show_diff(file1: Path, file2: Path):
 # ! When running test locally (on dirty repo), add vcs_ref="HEAD" to run_copy()
 
 
-@freeze_time(FROZEN_TEST_DATE)
+def copier_copy(workaround_tmp_path):
+    run_copy(
+        PROJECT_ROOT,
+        workaround_tmp_path,
+        vcs_ref="HEAD",
+        data={
+            "project_name": "Sphinx Minimal Theme",
+            "project_slug": "sphinx_minimal_theme",
+            "description": "Minimal but full-fledged three-column docs theme.",
+            "sample_docs_slug": "sample_docs",
+        },
+    )
+
+
 def test_defaults(workaround_tmp_path: Path, datadir: Path):
+    """Compare the contents of the "copier copy" with the expected contents in the test data directory."""
+
     # *** Arrange ***
 
     # *** Act ***
-    run_copy(
-        PROJECT_ROOT, workaround_tmp_path, unsafe=True, defaults=True, vcs_ref="HEAD"
-    )
+    copier_copy(workaround_tmp_path)
 
     # *** Assert ***
     deep_compare_dirs(workaround_tmp_path, datadir / "defaults")
 
 
-def test_license_other(workaround_tmp_path: Path):
-    # *** Arrange ***
-
-    # *** Act ***
-    run_copy(
-        PROJECT_ROOT,
-        workaround_tmp_path,
-        unsafe=True,
-        defaults=True,
-        data={"license": "Other"},
-    )
-
-    # *** Assert ***
-    assert (
-        workaround_tmp_path / "LICENSE"
-    ).read_text() == "PLEASE REPLACE THIS FILE WITH YOUR LICENSE FILE"
-
-
 def test_nox_build(workaround_tmp_path: Path):
-    """Test if `nox -s build` does not crash."""
+    """Tests that `nox -s build` in the generated project does NOT crash."""
     # *** Arrange ***
 
     # *** Act ***
-    run_copy(PROJECT_ROOT, workaround_tmp_path, unsafe=True, defaults=True)
+    copier_copy(workaround_tmp_path)
 
     # *** Assert ***
-    subprocess.run(["nox", "-s", "build"], check=True, cwd=workaround_tmp_path)
-
-
-@freeze_time(FROZEN_TEST_DATE)
-def test_nox_build_all_redirect(workaround_tmp_path: Path, datadir: Path):
-    """Test if `nox -s build_all redirect` works."""
-    # *** Arrange ***
-
-    # *** Act ***
-    run_copy(
-        PROJECT_ROOT,
-        workaround_tmp_path,
-        unsafe=True,
-        defaults=True,
-        data={"other_languages": ["cs", "he"], "other_builders": ["dirhtml"]},
-        vcs_ref="HEAD",
-    )
-    subprocess.run(
-        ["nox", "-s", "build_all", "redirect"], check=True, cwd=workaround_tmp_path
-    )
-
-    # *** Assert ***
-    deep_compare_dirs(
-        workaround_tmp_path / "build", datadir / "nox_build_all_redirect" / "build"
-    )
-
-
-def test_nox_gettext(workaround_tmp_path: Path, datadir: Path):
-    """Test if `nox -s gettext` works."""
-    # *** Arrange ***
-
-    # *** Act ***
-    run_copy(
-        PROJECT_ROOT,
-        workaround_tmp_path,
-        unsafe=True,
-        defaults=True,
-        data={"other_languages": ["cs", "he"]},
-    )
-    subprocess.run(["nox", "-s", "gettext"], check=True, cwd=workaround_tmp_path)
-
-    # *** Assert ***
-    # Does it creates expected .po files in source/locales?
-    # Do not compare contens because they contain different `POT-Creation` header values.
-    shallow_compare_dirs(
-        workaround_tmp_path / "source" / "locales",
-        datadir / "nox_gettext" / "source" / "locales",
-    )
-    # Does it creates expected .pot file in build/gettext?
-    shallow_compare_dirs(
-        workaround_tmp_path / "build" / "gettext",
-        datadir / "nox_gettext" / "build" / "gettext",
-    )
+    subprocess.run(["nox", "-s", "build"], cwd=workaround_tmp_path, check=True)

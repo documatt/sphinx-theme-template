@@ -1,4 +1,5 @@
 import os
+import subprocess
 from pathlib import Path
 
 import nox
@@ -7,8 +8,11 @@ import nox
 # *** Settings ***
 # *****************************************************************************
 
-INDIR = "source"
-OUTDIR = "build"
+THEME_NAME = "sphinx_minimal_theme"
+
+DOCS_ROOT = "sample_docs"
+DOCS_INDIR = os.path.join(DOCS_ROOT, "source")
+DOCS_OUTDIR = os.path.join(DOCS_ROOT, "build")
 
 DEFAULT_SPHINX_OPTS = [
     # Speed up the build by using multiple cores
@@ -19,13 +23,20 @@ DEFAULT_SPHINX_OPTS = [
     # Be quiet
     "-q",
 ]
-SPHINX_AUTOBUILD_OPTS = []
+SPHINX_AUTOBUILD_OPTS = [
+    #  When developing themes, it is recommended to disable Sphinx's incremental build
+    "-a"
+]
 
 DEFAULT_BUILDER = "html"
 BUILDERS = [DEFAULT_BUILDER] + []
 
 DEFAULT_LANGUAGE = "en"
 LANGUAGES = [DEFAULT_LANGUAGE] + []
+
+NPM_THEME_INSTALL = ["npm", "install"]
+NPM_THEME_BUILD = ["npm", "run", "theme:build"]
+NPM_THEME_WATCH = ["npm", "run", "theme:watch"]
 
 # Speed up builds by reusing virtualenvs
 nox.options.reuse_existing_virtualenvs = True
@@ -41,7 +52,7 @@ nox.options.sessions = []
 
 def get_outdir_path(builder: str, lang: str) -> str:
     """Constructs the output path."""
-    return os.path.join(OUTDIR, builder, lang)
+    return os.path.join(DOCS_OUTDIR, builder, lang)
 
 
 def get_sphinx_opts(lang: str) -> list[str]:
@@ -65,15 +76,22 @@ def get_builder_language(session) -> tuple[str, str]:
         return DEFAULT_BUILDER, DEFAULT_LANGUAGE
 
 
-def run_sphinx_builder(session, builder, language):
-    """Single place for invoking Sphinx builder. Called from all build-related sessions."""
-    session.run(
-        "sphinx-build",
+def get_sphinx_build_args(builder: str, language: str) -> list[str]:
+    """Constructs the sphinx-build command arguments."""
+    return [
         "-b",
         builder,
-        INDIR,
+        DOCS_INDIR,
         get_outdir_path(builder, language),
         *get_sphinx_opts(language),
+    ]
+
+
+def run_sphinx_builder(session, builder, language):
+    """Invoke Sphinx builder. Called from all build-related sessions."""
+    session.run(
+        "sphinx-build",
+        *get_sphinx_build_args(builder, language),
         # Warning as error
         "-W",
     )
@@ -84,7 +102,25 @@ def install_dependencies(session, *extra_deps: str):
     # Read dependencies from theme
     deps = nox.project.load_toml("pyproject.toml")["project"]["dependencies"]
 
-    session.install(*deps, *extra_deps)
+    # Read dependencies from sample docs
+    docs_pyproject_toml = Path(DOCS_ROOT, "pyproject.toml").resolve()
+    docs_deps = nox.project.load_toml(docs_pyproject_toml)["project"]["dependencies"]
+
+    # "-e ." mean install theme itself in editable mode
+    session.install(*deps, *docs_deps, "-e", ".", *extra_deps)
+
+
+def install_and_build_theme(session):
+    """Build the theme."""
+    session.run(*NPM_THEME_INSTALL, external=True)
+    session.run(*NPM_THEME_BUILD, external=True)
+
+
+def install_and_watch_theme(session):
+    """Watch the theme for changes."""
+    session.run(*NPM_THEME_INSTALL, external=True)
+    # Runs on background
+    subprocess.Popen(NPM_THEME_WATCH)
 
 
 # *****************************************************************************
@@ -98,6 +134,8 @@ def install_dependencies(session, *extra_deps: str):
 @nox.parametrize("language", LANGUAGES)
 def build_all(session, builder, language):
     """Build documentation for all builders/languages."""
+    install_and_build_theme(session)
+
     install_dependencies(session)
 
     run_sphinx_builder(session, builder, language)
@@ -107,7 +145,7 @@ def build_all(session, builder, language):
 @nox.parametrize("builder", BUILDERS)
 def redirect(session, builder):
     """Create a redirect from the root to the default language."""
-    Path(OUTDIR, builder, "index.html").write_text(
+    Path(DOCS_OUTDIR, builder, "index.html").write_text(
         f'<html><head><meta http-equiv="refresh" content="0; url={DEFAULT_LANGUAGE}/index.html"></head></html>'
     )
 
@@ -115,6 +153,8 @@ def redirect(session, builder):
 @nox.session
 def build(session):
     """Build documentation for a builder/language."""
+    install_and_build_theme(session)
+
     install_dependencies(session)
 
     builder, language = get_builder_language(session)
@@ -124,12 +164,14 @@ def build(session):
 @nox.session
 def clean(session):
     """Clean the build directory."""
-    session.run("rm", "-rf", OUTDIR, external=True)
+    session.run("rm", "-rf", DOCS_OUTDIR, external=True)
 
 
 @nox.session
 def preview(session):
     """Build and serve the docs with automatic reload on change."""
+    install_and_watch_theme(session)
+
     install_dependencies(session, "sphinx-autobuild==2024.10.3")
 
     # Build sample and serve
@@ -138,8 +180,14 @@ def preview(session):
         "sphinx-autobuild",
         "-b",
         builder,
-        INDIR,
+        # Sample docs are watched by default
+        DOCS_INDIR,
+        # But watch also for changes in theme
+        "--watch",
+        os.path.join("src", THEME_NAME),
+        # Output dir as usual
         get_outdir_path(builder, language),
+        # Standard Sphinx options
         *get_sphinx_opts(language),
         *SPHINX_AUTOBUILD_OPTS,
     )
@@ -153,14 +201,14 @@ def gettext(session):
 
     install_dependencies(session, "sphinx-intl==2.2.0")
 
-    gettext_outdir = os.path.join(OUTDIR, "gettext")
+    gettext_outdir = os.path.join(DOCS_OUTDIR, "gettext")
 
     # Generate .pot files from Sphinx
     session.run(
         "sphinx-build",
         "-b",
         "gettext",
-        INDIR,
+        DOCS_INDIR,
         gettext_outdir,
         *DEFAULT_SPHINX_OPTS,
     )
@@ -178,7 +226,7 @@ def gettext(session):
         "sphinx-intl",
         # Read locale_dirs to place .po files from conf.py
         "-c",
-        os.path.join(INDIR, "conf.py"),
+        os.path.join(DOCS_INDIR, "conf.py"),
         # update .po files
         "update",
         # from .pot files at

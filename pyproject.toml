@@ -6,4 +6,21 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "copier>=9.5.0",
+    # The remaining are rather "dev" dependencies
+    "pytest==8.3.4",
+    "nox==2024.10.9",
+    "pytest-datadir==1.5.0",
+    "deep_dircmp==0.2.0",
+    "freezegun==1.5.1",
+
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    # Recommended by Pytest for new projects
+    "--import-mode=importlib",
+    # Ignore tests in template/ and tests/test_bake/
+    "--ignore=template",
+    "--ignore=tests/test_bake/",
+
 ]
