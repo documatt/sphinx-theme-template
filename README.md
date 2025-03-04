@@ -66,8 +66,8 @@ Answer the series of questions, and you are ready to go. You have the skeleton o
 Main Sphinx theme template features:
 
 - 💯 Free & open-source.
-- ✍️ Modern frontend tooling with Tailwind.
-- 🏗️ Modern Python setup with `pyproject.toml`, uv, etc.
+- ✍️ Modern Node.js frontend tooling with Tailwind CSS.
+- 🏗️ Modern Python setup with `pyproject.toml`, pytest, etc.
 - 📒 The real-world documentation sample to test themes.
 - 😀 Sane configuration defaults and best practices.
 - 🎨 VS Code support: recommended extensions, settings, and formatting.
