@@ -76,13 +76,12 @@ def show_diff(file1: Path, file2: Path):
         print(line, end="")
 
 
-# ! When running test locally (on dirty repo), add vcs_ref="HEAD" to run_copy()
-
-
 def copier_copy(workaround_tmp_path):
+    """Run copier to generate the project."""
     run_copy(
         PROJECT_ROOT,
         workaround_tmp_path,
+        # ! When running test locally (on dirty repo), add vcs_ref="HEAD" to run_copy()
         vcs_ref="HEAD",
         data={
             "project_name": "Sphinx Minimal Theme",
