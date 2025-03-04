@@ -1,4 +1,4 @@
-# Copier Sphinx Theme Template
+# Sphinx Theme Template
 
 <div align="center">
 
@@ -46,18 +46,10 @@ The recommended way to install the Copier is [uv](https://docs.astral.sh/uv/). T
 With uv installed, open the terminal and
 
 ```
-uvx copier copy --trust https://github.com/documatt/sphinx-theme-template my-new-theme
+uvx copier copy https://github.com/documatt/sphinx-theme-template my-new-theme
 ```
 
 Answer the series of questions, and you are ready to go. You have the skeleton of a completely functional Sphinx theme in `my-new-theme` folder in just a few moments.
-
-## 🍿 Watch
-
-<!-- Link created with https://githubvideo.com -->
-
-[![How to create Sphinx documentation from a template](http://i.ytimg.com/vi/SvtTbJW7KLg/hqdefault.jpg)](https://www.youtube.com/watch?v=SvtTbJW7KLg)
-
-[![How to preview Sphinx documentation?](http://i.ytimg.com/vi/tVKpPXw5deg/hqdefault.jpg)](https://www.youtube.com/watch?v=tVKpPXw5deg)
 
 ## Key Features
 
@@ -78,6 +70,10 @@ Main Sphinx theme template features:
 <!-- .features -->
 
 Learn more in [📚documentation](https://documatt.com/sphinx-theme-template).
+
+## Sphinx Documentation Template
+
+Are you looking for a **documentation template** instead? See also our [sphinx-doc-template](https://github.com/documatt/sphinx-doc-template).
 
 ## Community and contributions
 
