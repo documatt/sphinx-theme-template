@@ -20,7 +20,7 @@ project_name:
 project_slug:
   type: str
   default: "{{ project_name|lower|replace(' ', '_') }}"
-  help: The name for machines. Like 'sphinx_foo_theme'. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
+  help: The name for machines. Like 'sphinx_foo_theme'. Must be a valid Python package (_ instead of space, no special characters).
   validator: >-
     {% if not project_slug.strip() %}
     Invalid value
