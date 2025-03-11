@@ -46,10 +46,10 @@ The recommended way to install the Copier is [uv](https://docs.astral.sh/uv/). T
 With uv installed, open the terminal and
 
 ```
-uvx copier copy https://github.com/documatt/sphinx-theme-template my-new-theme
+uvx copier copy gh:documatt/sphinx-theme-template my-new-theme
 ```
 
-Answer the series of questions, and you are ready to go. You have the skeleton of a completely functional Sphinx theme in `my-new-theme` folder in just a few moments.
+Answer the series of questions, and you are ready to go. You have the skeleton of a completely functional Sphinx theme in `my-new-theme` folder in just a few moments. Use `.` for the current folder.
 
 ## Key Features
 

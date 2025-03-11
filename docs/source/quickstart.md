@@ -6,25 +6,29 @@
 [Nox]: https://nox.thea.codes/
 [uv]: https://docs.astral.sh/uv/
 
-You will need Python and two Python tools:
+For Sphinx and automation, you will need Python and two Python tools:
 
 - [Copier]: scaffolding tool that will generate from this template a Sphinx theme on your disk
 - [Nox]: automation tool for easier building docs from project sources
 
 The recommended way to install and run is using the [uv] tool. The uv can even install Python for you if you don't have it already.
 
-1. [**Install uv**](https://docs.astral.sh/uv/getting-started/installation/) for your environment.
+You will also need Node.js and npm tool installed. Sphinx themes are basically websites, and this template comes preconfigured for development with [Tailwind CSS](https://tailwindcss.com), a Node.js based tool. Additionally, a few developer tools preconfigured are Node.js based, such as those for formatting and linting.
+
+1. [**Install uv**](https://docs.astral.sh/uv/getting-started/installation/).
 
    ```{seealso}
    See [Copier docs][Copier] and [Nox docs][Nox] for other installation options if uv is not suitable for you.
    ```
+
+2. [**Install Node.js and npm**](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). We recommend you LTS version.
 
 ## Tutorial
 
 1. **Answer questions.** Open the terminal, choose a destination folder (use `.` for current), and follow the wizard. E.g.,:
 
    ```
-   uvx copier copy https://github.com/documatt/sphinx-theme-template sphinx-my-theme
+   uvx copier copy gh:documatt/sphinx-theme-template sphinx-my-theme
    ```
 
    This command will install and call Copier.
@@ -127,3 +131,19 @@ The recommended way to install and run is using the [uv] tool. The uv can even i
 1. **Enjoy.**
 
 % TODO: See all the other cool [features](features.md) provided by the template.
+
+## VS Code setup
+
+The template comes with improvements to the developer experience when local working in VS Code.
+
+1. VS Code prompts you to install the recommended extensions from `.vscode/extensions.json` when opened for the first time.
+1. Save `.vscode/settings.json.sample` as `settings.json`.
+
+## Local development
+
+1. At project root run `npm i` to install Node.js tools for formatting and liting.
+1. At project root run `uv sync`. This will create virtual environment folder `.venv/`.
+
+   In VS Code, virtual environment folder is automatically detected. VS Code asks you to use it. Then it appears in statusbar.
+   ![](_static/vscode-venv-detected.png)
+   ![](_static/vscode-venv-statusbar.png)

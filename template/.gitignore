@@ -23,5 +23,6 @@ node_modules
 
 # editors
 .idea/
-!.vscode/*.sample
 .vscode/*
+!.vscode/extensions.json
+!.vscode/*.sample
