@@ -24,5 +24,10 @@
   "files.associations": {
     "**/src/**/*.html": "jinja-html",
     "**/src/**/styles/*.css": "tailwindcss"
+  },
+
+  // Enable Tailwind intellisense in Jinja templates
+  "tailwindCSS.includeLanguages": {
+    "jinja-html": "html"
   }
 }
