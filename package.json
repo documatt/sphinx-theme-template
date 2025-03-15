@@ -1,9 +1,16 @@
 {
   "scripts": {
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "changelog": "npx git-cliff -o CHANGELOG.md"
   },
   "devDependencies": {
-    "prettier": "3.5.2"
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "husky": "^9.1.7",
+    "prettier": "3.5.2",
+    "prettier-plugin-jinja-template": "^2.0.0",
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }

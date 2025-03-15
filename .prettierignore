@@ -1,0 +1,14 @@
+# Prettier ignore list
+# (everything from .gitignore is already excluded)
+
+tests/test_bake
+template/.prettierrc
+
+# Ugly preventing pass Prettier but just copy from Sphinx Basic theme
+template/src/{{ project_slug }}/domainindex.html
+template/src/{{ project_slug }}/genindex.html
+template/src/{{ project_slug }}/static/doctools.js
+template/src/{{ project_slug }}/static/documentation_options.js.jinja
+template/src/{{ project_slug }}/static/language_data.js.jinja
+template/src/{{ project_slug }}/static/searchtools.js
+template/src/{{ project_slug }}/static/sphinx_highlight.js
