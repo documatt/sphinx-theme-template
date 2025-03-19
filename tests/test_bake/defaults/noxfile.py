@@ -14,7 +14,8 @@ DOCS_ROOT = "sample_docs"
 DOCS_INDIR = os.path.join(DOCS_ROOT, "source")
 DOCS_OUTDIR = os.path.join(DOCS_ROOT, "build")
 
-DEFAULT_SPHINX_OPTS = [
+# Sphinx options for both build and preview
+SPHINX_OPTS = [
     # Speed up the build by using multiple cores
     "-j",
     "auto",
@@ -23,16 +24,16 @@ DEFAULT_SPHINX_OPTS = [
     # Be quiet
     "-q",
 ]
-SPHINX_AUTOBUILD_OPTS = [
+
+# Extra options for sphinx-autobuild
+AUTOBUILD_OPTS = [
     #  When developing themes, it is recommended to disable Sphinx's incremental build
     "-a"
 ]
 
 DEFAULT_BUILDER = "html"
-BUILDERS = [DEFAULT_BUILDER] + []
 
 DEFAULT_LANGUAGE = "en"
-LANGUAGES = [DEFAULT_LANGUAGE] + []
 
 NPM_THEME_INSTALL = ["npm", "install"]
 NPM_THEME_BUILD = ["npm", "run", "theme:build"]
@@ -59,7 +60,7 @@ def get_outdir_path(builder: str, lang: str) -> str:
 
 def get_sphinx_opts(lang: str) -> list[str]:
     """Generate a default list of Sphinx options for a given language."""
-    return DEFAULT_SPHINX_OPTS + [
+    return SPHINX_OPTS + [
         # Set lang
         "-D",
         f"language={lang}",
@@ -76,27 +77,6 @@ def get_builder_language(session) -> tuple[str, str]:
         return session.posargs[0], session.posargs[1]
     else:
         return DEFAULT_BUILDER, DEFAULT_LANGUAGE
-
-
-def get_sphinx_build_args(builder: str, language: str) -> list[str]:
-    """Constructs the sphinx-build command arguments."""
-    return [
-        "-b",
-        builder,
-        DOCS_INDIR,
-        get_outdir_path(builder, language),
-        *get_sphinx_opts(language),
-    ]
-
-
-def run_sphinx_builder(session, builder, language):
-    """Invoke Sphinx builder. Called from all build-related sessions."""
-    session.run(
-        "sphinx-build",
-        *get_sphinx_build_args(builder, language),
-        # Warning as error
-        "-W",
-    )
 
 
 def install_dependencies(session, *extra_deps: str):
@@ -132,27 +112,6 @@ def install_and_watch_theme(session):
 
 
 @nox.session
-@nox.parametrize("builder", BUILDERS)
-@nox.parametrize("language", LANGUAGES)
-def build_all(session, builder, language):
-    """Build documentation for all builders/languages."""
-    install_and_build_theme(session)
-
-    install_dependencies(session)
-
-    run_sphinx_builder(session, builder, language)
-
-
-@nox.session
-@nox.parametrize("builder", BUILDERS)
-def redirect(session, builder):
-    """Create a redirect from the root to the default language."""
-    Path(DOCS_OUTDIR, builder, "index.html").write_text(
-        f'<html><head><meta http-equiv="refresh" content="0; url={DEFAULT_LANGUAGE}/index.html"></head></html>'
-    )
-
-
-@nox.session
 def build(session):
     """Build documentation for a builder/language."""
     install_and_build_theme(session)
@@ -160,7 +119,16 @@ def build(session):
     install_dependencies(session)
 
     builder, language = get_builder_language(session)
-    run_sphinx_builder(session, builder, language)
+    session.run(
+        "sphinx-build",
+        "-b",
+        builder,
+        DOCS_INDIR,
+        get_outdir_path(builder, language),
+        *get_sphinx_opts(language),
+        # Warning as error
+        "-W",
+    )
 
 
 @nox.session
@@ -191,52 +159,5 @@ def preview(session):
         get_outdir_path(builder, language),
         # Standard Sphinx options
         *get_sphinx_opts(language),
-        *SPHINX_AUTOBUILD_OPTS,
-    )
-
-
-@nox.session
-def gettext(session):
-    """Generate .pot files and update .po files."""
-    if LANGUAGES == [DEFAULT_LANGUAGE]:
-        session.error("No additional languages to generate .pot files for.")
-
-    install_dependencies(session, "sphinx-intl==2.2.0")
-
-    gettext_outdir = os.path.join(DOCS_OUTDIR, "gettext")
-
-    # Generate .pot files from Sphinx
-    session.run(
-        "sphinx-build",
-        "-b",
-        "gettext",
-        DOCS_INDIR,
-        gettext_outdir,
-        *DEFAULT_SPHINX_OPTS,
-    )
-
-    # Prepare "-l" param for sphinx-intl but exclude default lang
-    l_params = []
-    langs_without_default = LANGUAGES.copy()
-    langs_without_default.remove(DEFAULT_LANGUAGE)
-    for lang in langs_without_default:
-        l_params.append("-l")
-        l_params.append(lang)
-
-    # Update .po from .pot templates
-    session.run(
-        "sphinx-intl",
-        # Read locale_dirs to place .po files from conf.py
-        "-c",
-        os.path.join(DOCS_INDIR, "conf.py"),
-        # update .po files
-        "update",
-        # from .pot files at
-        "-p",
-        gettext_outdir,
-        # for supported languages
-        *l_params,
-        # no line wrapping
-        "-w",
-        "0",
+        *AUTOBUILD_OPTS,
     )
