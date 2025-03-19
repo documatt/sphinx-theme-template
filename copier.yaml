@@ -38,3 +38,12 @@ sample_docs_slug:
   type: str
   default: "sample_docs"
   help: The name for the sample docs folder. Must be a valid folder name. We recommend do not use spaces, special characters, etc.
+
+theme_inherit:
+  type: str
+  default: "basic"
+  help: The theme to inherit from. We recommend 'basic' or 'sphinx_null_theme' for most cases.
+  validator: >-
+    {% if not theme_inherit.strip() %}
+    Invalid value
+    {% endif %}

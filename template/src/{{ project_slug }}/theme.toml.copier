@@ -1,0 +1,5 @@
+[theme]
+inherit = "{{ theme_inherit }}"
+stylesheets = [
+    "styles/output.css",     # build by Tailwind CSS
+]

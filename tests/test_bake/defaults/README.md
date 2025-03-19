@@ -1,4 +1,4 @@
-# sphinx_minimal_theme
+# sphinx_foo_theme
 
 [![Made with Sphinx Theme Template](https://img.shields.io/badge/template-Sphinx%20Theme-blue?labelColor=097cba&color=163B36)](https://github.com/documatt/sphinx-theme-template) ![Code style Prettier badge](https://img.shields.io/badge/codestyle-Prettier-blue?labelColor=097cba&color=163B36)
 

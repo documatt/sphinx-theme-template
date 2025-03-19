@@ -2,10 +2,10 @@
 module.exports = {
   // Paths are relative to project root, not tailwind.config.js file
   content: [
-    "./src/sphinx_minimal_theme/static/styles/**/*.css",
-    "./src/sphinx_minimal_theme/static/scripts/**/*.js",
+    "./src/sphinx_foo_theme/static/styles/**/*.css",
+    "./src/sphinx_foo_theme/static/scripts/**/*.js",
     // Jinja templates
-    "./src/sphinx_minimal_theme/**/*.html",
+    "./src/sphinx_foo_theme/**/*.html",
     // exclude node_modules/
     "!./node_modules/**",
   ],

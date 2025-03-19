@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "theme:build": "npx tailwindcss -i ./src/sphinx_minimal_theme/static/styles/input.css -o ./src/sphinx_minimal_theme/static/styles/output.css",
+    "theme:build": "npx tailwindcss -i ./src/sphinx_foo_theme/static/styles/input.css -o ./src/sphinx_foo_theme/static/styles/output.css",
     "theme:watch": "concurrently -n 'theme:watch' -c 'blue' \"npm run theme:build -- --watch\""
   },
   "devDependencies": {

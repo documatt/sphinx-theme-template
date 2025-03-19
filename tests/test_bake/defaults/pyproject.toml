@@ -1,8 +1,8 @@
 [project]
-name = "sphinx_minimal_theme"
+name = "sphinx_foo_theme"
 version = "0.1.0"
 readme = "README.md"
-description = "Minimal but full-fledged three-column docs theme."
+description = "Foo but full-bar theme."
 dependencies = [
     "beautifulsoup4>=4.13.3",
     "sphinx>=8.0",
@@ -21,7 +21,7 @@ classifiers = [
 
 # Register the theme into Sphinx
 [project.entry-points."sphinx.html_themes"]
-sphinx_minimal_theme = "sphinx_minimal_theme"
+sphinx_foo_theme = "sphinx_foo_theme"
 
 # Dev dependencies
 [dependency-groups]

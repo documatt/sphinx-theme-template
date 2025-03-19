@@ -1,0 +1,5 @@
+[theme]
+inherit = "basic"
+stylesheets = [
+    "styles/output.css",     # build by Tailwind CSS
+]

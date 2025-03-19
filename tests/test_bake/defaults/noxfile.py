@@ -8,7 +8,7 @@ import nox
 # *** Settings ***
 # *****************************************************************************
 
-THEME_NAME = "sphinx_minimal_theme"
+THEME_NAME = "sphinx_foo_theme"
 
 DOCS_ROOT = "sample_docs"
 DOCS_INDIR = os.path.join(DOCS_ROOT, "source")
