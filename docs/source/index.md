@@ -7,4 +7,7 @@
 :maxdepth: 2
 
 quickstart
+features
+usage
+reference
 ```
