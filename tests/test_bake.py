@@ -84,10 +84,11 @@ def copier_copy(workaround_tmp_path):
         # ! When running test locally (on dirty repo), add vcs_ref="HEAD" to run_copy()
         vcs_ref="HEAD",
         data={
-            "project_name": "Sphinx Minimal Theme",
-            "project_slug": "sphinx_minimal_theme",
-            "description": "Minimal but full-fledged three-column docs theme.",
+            "project_name": "Sphinx Foo Theme",
+            "project_slug": "sphinx_foo_theme",
+            "description": "Foo but full-bar theme.",
             "sample_docs_slug": "sample_docs",
+            "theme_inherit": "basic",
         },
     )
 
