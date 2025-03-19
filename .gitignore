@@ -13,6 +13,7 @@ wheels/
 build
 _build
 *.mo
+.tmp
 
 # Node
 node_modules
