@@ -31,13 +31,13 @@ Since they run in parallel, they are independent. It means:
 
 The `package.json` must contain the following `scripts` tasks. They are called by Nox tasks. However, you can add your own additional tasks.
 
-```json
+```
 {
   "scripts": {
     "theme:build": "...",
     "theme:watch": "..."
-  },
-  ...
+  }
+}
 ```
 
 For example, if you want to build just Node.js assets, call `npm run theme:build`.
