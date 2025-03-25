@@ -9,35 +9,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Improve VS Code experience. Enabling Tailwind intellisense in Jinja templates
+- Set up git hook checks
+- Rename gh workflow to gh-pages.yaml
+- Upgrade to tailwind 4
+- Ask for theme to inherit from
+- Reduce noxfile.py only to clean, build and preview
+- Use uv instead venv in nox to speed up builds
+- Ignore .tmp
+- Rename gh workflow to publish-docs.yaml
+- Wip
+- Setup lintcommit, git-cliff and prettier
+- Improve VS Code experience
 
 ## [0.1.1] - 2025-03-11
 
 ### Added
 
-- Add VS Code support files to template.
+- Add VS Code support files to template
 
 ## [0.1.0] - 2025-03-09
 
 ### Added
 
-- Add minimal docs.
-- Add CHANGELOG.md, LICENCE, favicon and hero images.
+- Add minimal docs
+- Add CHANGELOG.md, LICENCE, favicon and hero images
 
 ### Changed
 
-- Release v0.1.0.
-- Run tests in GH Actions.
-- Associate jinja modes for vscode.
-- Convert to copier template.
-- Initial (template theme).
+- Release v0.1.0
+- Run tests in GH Actions
+- Associate jinja modes for vscode
+- Convert to copier template
+- Initial (template theme)
 
 ### Fixed
 
-- Dark/ligh mode icon.
-- Default template bake and nox -s build.
-- Package names is in snake_case.
-- Crash with sphinx theme static templates. Because Sphinx static template uses .jinja suffix too, Copier thinks they are its templates and crash. To prevent collision, we changed Copier template suffix to .copier.
+- Dark/ligh mode icon
+- Default template bake and nox -s build
+- Package names is in snake_case
+- Crash with sphinx theme static templates
 
 [unreleased]: https://github.com/documatt/sphinx-theme-template/compare/v0.1.1..HEAD
 [0.1.1]: https://github.com/documatt/sphinx-theme-template/compare/v0.1.0..v0.1.1

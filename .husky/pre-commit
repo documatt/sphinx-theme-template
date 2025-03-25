@@ -1,2 +1,4 @@
-npm run format:check
-npm run changelog
+npm run lint-staged
+npm run ruff:check
+npm run ruff:format
+npm test

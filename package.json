@@ -1,16 +1,47 @@
 {
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
     "prepare": "husky",
-    "changelog": "npx git-cliff -o CHANGELOG.md"
+    "changelog": "npx git-cliff -o CHANGELOG.md",
+    "lint-staged": "lint-staged",
+    "commitlint": "commitlint --edit",
+    "ruff:check": "uv run ruff check",
+    "ruff:format": "uv run ruff format",
+    "test": "uv run pytest"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
+    "git-cliff": "^2.8.0",
     "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
     "prettier": "3.5.2",
     "prettier-plugin-jinja-template": "^2.0.0",
     "prettier-plugin-tailwindcss": "^0.6.11"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "**/*": "npm run format"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-jinja-template",
+      "prettier-plugin-tailwindcss"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.html"
+        ],
+        "options": {
+          "parser": "jinja-template"
+        }
+      }
+    ]
   }
 }
