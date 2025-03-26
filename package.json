@@ -3,7 +3,7 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "prepare": "husky",
-    "changelog": "npx git-cliff -o CHANGELOG.md",
+    "changelog": "npx git-cliff --bump -o CHANGELOG.md ",
     "lint-staged": "lint-staged",
     "commitlint": "commitlint --edit",
     "ruff:check": "uv run ruff check",
