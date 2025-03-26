@@ -6,8 +6,8 @@ import nox
 # *** Settings ***
 # *****************************************************************************
 
-INDIR = "source"
-OUTDIR = "build"
+INDIR = "."
+OUTDIR = "_build"
 
 DEFAULT_SPHINX_OPTS = [
     # Speed up the build by using multiple cores
@@ -20,7 +20,7 @@ DEFAULT_SPHINX_OPTS = [
 ]
 SPHINX_AUTOBUILD_OPTS = []
 
-DEFAULT_BUILDER = "html"
+DEFAULT_BUILDER = "dirhtml"
 BUILDERS = [DEFAULT_BUILDER] + []
 
 DEFAULT_LANGUAGE = "en"
@@ -33,7 +33,7 @@ nox.options.reuse_existing_virtualenvs = True
 dependencies = nox.project.load_toml("pyproject.toml")["project"]["dependencies"]
 
 # No default sessions when "nox" is run (explicit is better than implicit)
-nox.options.sessions = []
+nox.options.sessions = ["build_all"]
 
 
 # *****************************************************************************
