@@ -147,3 +147,11 @@ The template comes with improvements to the developer experience when local work
    In VS Code, virtual environment folder is automatically detected. VS Code asks you to use it. Then it appears in statusbar.
    ![](_static/vscode-venv-detected.png)
    ![](_static/vscode-venv-statusbar.png)
+
+## VS Code setup
+
+The template comes with improvements to the developer experience when local working in VS Code.
+
+1. VS Code prompts you to install the recommended extensions from `.vscode/extensions.json` when opened for the first time.
+1. Save or symlink `.vscode/settings.json.sample` as `settings.json`.
+1. Be sure you have selected python interpreter at `.venv/bin/python` after [](#local-development).
